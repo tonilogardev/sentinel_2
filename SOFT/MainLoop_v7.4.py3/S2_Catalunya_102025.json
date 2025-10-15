@@ -1,0 +1,91 @@
+{
+	"downloadURL"			:	"https://catalogue.dataspace.copernicus.eu/",
+	"authentificationURL"	:	"https://identity.dataspace.copernicus.eu/",
+	"urlUser"				:	"pere.rios@icgc.cat",
+	"urlPwd"				:	"User1234$#4321#$",
+	"softGeoproces"			:	"\\\\icgc.local\\aplicacions\\produccio\\DFApplications",
+	"softGeoprocesGDAL"		:	"\\\\icgc.local\\aplicacions\\produccio\\DFApplications\\gdal381_apps",
+	"timeSleep"				:	3600,
+	"machineDependentParameters":{
+		"sfpcotprod01":{
+			"fileXLS"			  :	"Q:\\S2_AGOST2025\\S2_Segments_CAT_NDVI_v1_102025.xlsx",
+			"workingFolder"		  :	"Q:\\S2_AGOST2025",  
+			"quicklookDir"		  :	"Z:\\Sentinel-2",
+			"pathL2AforIndex"	  :	"I:\\Disc_I\\S2_CAT_NDVI_Download\\SOFT\\Sen2Cor-02.12.03-win64\\L2A_Process_DEM-CAT.bat",
+			"pathL2AforOrthoimage":	"I:\\Disc_I\\S2_CAT_NDVI_Download\\SOFT\\Sen2Cor-02.12.03-win64\\L2A_Process_NO-DEM.bat"
+		},	
+		"sfdsm01":{
+			"fileXLS"			  :	"S2_Segments_CAT_L2A-DEM_v1.xlsx",
+			"workingFolder"		  :	"F:/PCOTENVI_F/S2_CAT_L2A-DEM_Download/",
+			"quicklookDir"		  :	"F:/PCOTENVI_F/S2_CAT_L2A-DEM_Download/QuickLook/",
+			"pathL2AforIndex"	  :	"F:/PCOTENVI_F/S2_CAT_L2A-DEM_Download/SOFT/Sen2Cor-02.11.00-win64/L2A_Process_DEM-CAT.bat",
+			"pathL2AforOrthoimage":	"F:/PCOTENVI_F/S2_CAT_L2A-DEM_Download/SOFT/Sen2Cor-02.11.00-win64/L2A_Process_DEM-CAT.bat"
+		}	
+
+		},
+	"productL1Cgeneration"			:	"NO",
+	"onlyLastBaselineForGranule"	:	"YES",
+    "polySearch" : "POLYGON((0.1873941083836813 40.46212014624089,3.6319312482049257 40.46212014624089,3.6319312482049257 42.91398496782941,0.1873941083836813 42.91398496782941,0.1873941083836813 40.46212014624089))",
+	"limitsUTM"	:	{
+		"R051"	:	"240000,467500,4780000,4480000",
+		"R008"	:	"300000,540000,4780000,4480000"
+	},
+	"perOrbitZoneUTM"	:{
+		"R051"	:	"T31",
+		"R008"	:	"T31"
+	},
+    "granulesPerOrbit" :{
+		"R051" : [
+			"T30TYN",
+			"T31TBE",
+			"T31TBF",
+			"T31TBG",
+			"T31TCE",
+			"T31TCF",
+			"T31TCG",
+			"T31TCH",
+			"T31TDF",
+			"T31TDG",
+			"T31TDH"
+		],
+		"R008" : [
+			"T31TBE",
+			"T31TCE",
+			"T31TCF",
+			"T31TCG",
+			"T31TCH",
+			"T31TDE",
+			"T31TDF",
+			"T31TDG",
+			"T31TDH",
+			"T31TEE",
+			"T31TEF",
+			"T31TEG",
+			"T31TEH"
+		]
+	},
+	"checkTwoDatastrips"	:	"YES",
+	"twoDatastripsDependingParameters":{
+		"granulesToCheckArea" :{
+			"R051" : [
+				"T31TCH",
+				"T31TBE",
+				"T31TBF",
+				"T31TBG",
+				"T30TYN"
+			],
+			"R008" : [
+				"T31TDE",
+				"T31TDF",
+				"T31TDG",
+				"T31TDH"
+			]
+		},
+		"areaForGranulesToCheck" :{
+			"R051" : 12037,
+			"R008" : 12065
+		},
+		"areaThreshold" :	0.95,
+		"waitingTime" 	 :	86400
+	}
+}
