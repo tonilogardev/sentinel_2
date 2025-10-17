@@ -1,180 +1,4 @@
 """
-Mosaico L1C (10 m RGB) por fecha y órbita.
-
-Qué hace (menos es más)
-- Busca carpetas .SAFE extraídas de L1C en una carpeta.
-- Filtra por fecha (YYYY-MM-DD) y órbita relativa (R051/R008).
-- Crea un mosaico RGB 10 m (B04, B03, B02) en GeoTIFF (int16) con compresión LZW.
-
-Requisitos
-- GDAL disponible en el entorno (from osgeo import gdal).
-"""
-
-import os
-from pathlib import Path
-from datetime import datetime
-from typing import List, Dict, Optional
-import re
-
-from osgeo import gdal
-
-
-def ask(prompt: str, default: str = None) -> str:
-    v = input(f"{prompt}{' ['+default+']' if default else ''}: ").strip()
-    return v or (default or "")
-
-
-def ask_dir(msg: str) -> Path:
-    while True:
-        raw = input(f"{msg}: ").strip()
-        if (raw.startswith("'") and raw.endswith("'")) or (raw.startswith('"') and raw.endswith('"')):
-            raw = raw[1:-1]
-        if not raw:
-            print("Debes indicar una carpeta.")
-            continue
-        p = Path(os.path.expandvars(os.path.expanduser(raw)))
-        if p.exists() and not p.is_dir():
-            print("La ruta existe pero no es un directorio.")
-            continue
-        if not p.exists():
-            resp = input(f"La carpeta no existe. ¿Crear {p}? [s/N]: ").strip().lower()
-            if resp != "s":
-                continue
-            p.mkdir(parents=True, exist_ok=True)
-        return p
-
-
-def find_safe_dirs(root: Path, yyyymmdd: str) -> List[Path]:
-    safes = []
-    for p in root.glob("*.SAFE"):
-        name = p.name
-        if yyyymmdd in name:
-            safes.append(p)
-    return safes
-
-
-def detect_orbit_from_name(name: str) -> Optional[str]:
-    m = re.search(r"_R(\d{3})_", name)
-    return f"R{m.group(1)}" if m else None
-
-
-def collect_band_files(safe_dir: Path) -> Dict[str, List[str]]:
-    bands: Dict[str, List[str]] = {"B02": [], "B03": [], "B04": []}
-    granule_root = safe_dir / "GRANULE"
-    if not granule_root.exists():
-        return bands
-    for gran in granule_root.iterdir():
-        if not gran.is_dir():
-            continue
-        r10 = gran / "IMG_DATA" / "R10m"
-        if not r10.exists():
-            # Algunos L1C guardan 10 m directamente bajo IMG_DATA
-            r10 = gran / "IMG_DATA"
-        for band in ("B02", "B03", "B04"):
-            for jp2 in r10.glob(f"*_{band}_10m.jp2"):
-                bands[band].append(str(jp2))
-            for jp2 in r10.glob(f"*_{band}.jp2"):
-                # fallback por si no incluye sufijo _10m en el nombre
-                bands[band].append(str(jp2))
-    return bands
-
-
-def build_mosaic_vrt(out_vrt: Path, inputs: List[str]) -> None:
-    if not inputs:
-        raise RuntimeError("No hay entradas para el mosaico")
-    opts = gdal.BuildVRTOptions(resolution="highest", srcNodata=0, VRTNodata=0, separate=False)
-    ds = gdal.BuildVRT(str(out_vrt), inputs, options=opts)
-    if ds is None:
-        raise RuntimeError("Error al crear VRT")
-    ds = None
-
-
-def translate_rgb(vrt_r: Path, vrt_g: Path, vrt_b: Path, out_tif: Path) -> None:
-    # Crear VRT de 3 bandas a partir de VRTs mono-banda
-    opts_stack = gdal.BuildVRTOptions(separate=True)
-    ds = gdal.BuildVRT(str(out_tif.with_suffix(".vrt")), [str(vrt_r), str(vrt_g), str(vrt_b)], options=opts_stack)
-    if ds is None:
-        raise RuntimeError("Error al crear VRT RGB")
-    ds = None
-    # Convertir a GeoTIFF comprimido (int16), nodata=0
-    try:
-        gdal.Translate(
-            str(out_tif),
-            str(out_tif.with_suffix(".vrt")),
-            format="COG",
-            creationOptions=["COMPRESS=LZW", "BIGTIFF=YES"],
-            noData=0,
-        )
-    except Exception:
-        gdal.Translate(
-            str(out_tif),
-            str(out_tif.with_suffix(".vrt")),
-            format="GTiff",
-            creationOptions=["COMPRESS=LZW", "PREDICTOR=2", "BIGTIFF=YES"],
-            noData=0,
-        )
-
-
-def main():
-    print("Mosaico L1C 10m RGB por fecha (autodetección de órbita)")
-    safes_dir = ask_dir("Carpeta con .SAFE (extraídos)")
-    out_dir = ask_dir("Carpeta de salida de mosaicos")
-    date_str = ask("Fecha (YYYY-MM-DD)")
-    try:
-        dt = datetime.strptime(date_str, "%Y-%m-%d")
-    except ValueError:
-        print("Fecha inválida.")
-        return
-    yyyymmdd = dt.strftime("%Y%m%d")
-
-    safes = find_safe_dirs(safes_dir, yyyymmdd)
-    if not safes:
-        print("No se encontraron .SAFE para esa fecha.")
-        return
-
-    # Agrupar por órbita detectada en el nombre
-    groups: Dict[str, List[Path]] = {}
-    for sd in safes:
-        orb = detect_orbit_from_name(sd.name) or "RUNK"
-        groups.setdefault(orb, []).append(sd)
-
-    for orbit, safes_grp in groups.items():
-        print(f"\nProcesando órbita {orbit} ({len(safes_grp)} granulos)…")
-        b02_list: List[str] = []
-        b03_list: List[str] = []
-        b04_list: List[str] = []
-        for sd in safes_grp:
-            bands = collect_band_files(sd)
-            b02_list += bands["B02"]
-            b03_list += bands["B03"]
-            b04_list += bands["B04"]
-
-        if not (b02_list and b03_list and b04_list):
-            print("  Faltan bandas 10 m (B02/B03/B04). Saltando.")
-            continue
-
-        tmp_dir = out_dir / f"tmp_{yyyymmdd}_{orbit}"
-        tmp_dir.mkdir(parents=True, exist_ok=True)
-        vrt_b04 = tmp_dir / "B04.vrt"
-        vrt_b03 = tmp_dir / "B03.vrt"
-        vrt_b02 = tmp_dir / "B02.vrt"
-
-        print("  Creando VRTs por banda…")
-        build_mosaic_vrt(vrt_b04, b04_list)
-        build_mosaic_vrt(vrt_b03, b03_list)
-        build_mosaic_vrt(vrt_b02, b02_list)
-
-        out_tif = out_dir / f"S2_RGB_10m_{yyyymmdd}_{orbit}.tif"
-        print("  Generando mosaico RGB…")
-        translate_rgb(vrt_b04, vrt_b03, vrt_b02, out_tif)
-        print(f"  Listo: {out_tif}")
-
-    print("\nTerminado.")
-
-
-if __name__ == "__main__":
-    main()
-"""
 download_sentinel_2 — L1C: descargar, verificar MD5, extraer .SAFE y mosaicar 10 m RGB por fecha
 
 Menos es más:
@@ -229,6 +53,16 @@ def ask_dir(msg: str) -> Path:
             p.mkdir(parents=True, exist_ok=True)
         return p
 
+
+# Fechas
+def ask_date(label: str) -> str:
+    while True:
+        v = input(f"{label} (YYYY-MM-DD): ").strip()
+        try:
+            datetime.strptime(v, "%Y-%m-%d")
+            return v
+        except ValueError:
+            print("Formato invalido. Ejemplo: 2025-01-31")
 
 # ------------------------
 # Descarga + verificación + unzip
@@ -444,17 +278,14 @@ def main():
     print(f"- Catalogo: {catalog}")
     print(f"- Auth:     {auth}")
 
-    # Credenciales y fecha
+    # Credenciales y rango de fechas
     username = ask("Usuario CDSE (email)")
     password = getpass("Contrasena CDSE")
-    date_str = ask("Fecha (YYYY-MM-DD)")
-    try:
-        dt = datetime.strptime(date_str, "%Y-%m-%d")
-    except ValueError:
-        print("Fecha invalida.")
-        return
-    ymd = dt.strftime("%Y-%m-%d")
-    yyyymmdd = dt.strftime("%Y%m%d")
+    date_from = ask_date("Fecha inicio")
+    date_to = ask_date("Fecha fin  ")
+    # Normalizar orden
+    if datetime.strptime(date_to, "%Y-%m-%d") < datetime.strptime(date_from, "%Y-%m-%d"):
+        date_from, date_to = date_to, date_from
 
     # Rutas
     zips_dir = ask_dir("Carpeta de descargas (.zip)")
@@ -476,16 +307,16 @@ def main():
     except Exception:
         pass
 
-    # Buscar productos L1C del día sobre Catalunya
+    # Buscar productos L1C del rango sobre Catalunya
     try:
-        items = search_products(catalog, CATALUNYA_WKT, ymd, ymd)
+        items = search_products(catalog, CATALUNYA_WKT, date_from, date_to)
     except Exception as e:
         print(f"Error buscando productos: {e}")
         sys.exit(1)
     if not items:
-        print("Sin resultados para la fecha indicada.")
+        print("Sin resultados para el rango indicado.")
         return
-    print(f"Encontrados {len(items)} productos para {ymd}.")
+    print(f"Encontrados {len(items)} productos entre {date_from} y {date_to}.")
 
     # Descargar, validar y extraer
     for it in items:
@@ -509,43 +340,53 @@ def main():
         except Exception as e:
             print(f"  Fallo {name}: {e}")
 
-    # Mosaico por órbita detectada
-    safes = find_safe_dirs(safes_dir, yyyymmdd)
-    if not safes:
-        print("No se encontraron .SAFE para esa fecha.")
-        return
+    # Determinar los días a mosaicar a partir de los nombres descargados
+    fechas: List[str] = []
+    import re as _re
+    for it in items:
+        name = it.get("Name") or ""
+        m = _re.search(r"_MSIL1C_(\d{8})T", name)
+        if m:
+            fechas.append(m.group(1))
+    fechas = sorted(set(fechas))
+    if not fechas:
+        # fallback: usar el rango completo (puede mezclar días si hay SAFE previos)
+        fechas = [datetime.strptime(date_from, "%Y-%m-%d").strftime("%Y%m%d")] 
 
-    groups: Dict[str, List[Path]] = {}
-    for sd in safes:
-        orb = detect_orbit_from_name(sd.name) or "RUNK"
-        groups.setdefault(orb, []).append(sd)
-
-    for orbit, safes_grp in groups.items():
-        print(f"\nProcesando órbita {orbit} ({len(safes_grp)} granulos)…")
-        b02_list: List[str] = []
-        b03_list: List[str] = []
-        b04_list: List[str] = []
-        for sd in safes_grp:
-            bands = collect_band_files(sd)
-            b02_list += bands["B02"]
-            b03_list += bands["B03"]
-            b04_list += bands["B04"]
-        if not (b02_list and b03_list and b04_list):
-            print("  Faltan bandas 10 m (B02/B03/B04). Saltando.")
+    for yyyymmdd in fechas:
+        safes = find_safe_dirs(safes_dir, yyyymmdd)
+        if not safes:
             continue
-        tmp_dir = out_dir / f"tmp_{yyyymmdd}_{orbit}"
-        tmp_dir.mkdir(parents=True, exist_ok=True)
-        vrt_b04 = tmp_dir / "B04.vrt"
-        vrt_b03 = tmp_dir / "B03.vrt"
-        vrt_b02 = tmp_dir / "B02.vrt"
-        print("  Creando VRTs por banda…")
-        build_mosaic_vrt(vrt_b04, b04_list)
-        build_mosaic_vrt(vrt_b03, b03_list)
-        build_mosaic_vrt(vrt_b02, b02_list)
-        out_tif = out_dir / f"S2_RGB_10m_{yyyymmdd}_{orbit}.tif"
-        print("  Generando mosaico RGB…")
-        translate_rgb(vrt_b04, vrt_b03, vrt_b02, out_tif)
-        print(f"  Listo: {out_tif}")
+        groups: Dict[str, List[Path]] = {}
+        for sd in safes:
+            orb = detect_orbit_from_name(sd.name) or "RUNK"
+            groups.setdefault(orb, []).append(sd)
+        for orbit, safes_grp in groups.items():
+            print(f"\nProcesando {yyyymmdd} órbita {orbit} ({len(safes_grp)} granulos)…")
+            b02_list: List[str] = []
+            b03_list: List[str] = []
+            b04_list: List[str] = []
+            for sd in safes_grp:
+                bands = collect_band_files(sd)
+                b02_list += bands["B02"]
+                b03_list += bands["B03"]
+                b04_list += bands["B04"]
+            if not (b02_list and b03_list and b04_list):
+                print("  Faltan bandas 10 m (B02/B03/B04). Saltando.")
+                continue
+            tmp_dir = out_dir / f"tmp_{yyyymmdd}_{orbit}"
+            tmp_dir.mkdir(parents=True, exist_ok=True)
+            vrt_b04 = tmp_dir / "B04.vrt"
+            vrt_b03 = tmp_dir / "B03.vrt"
+            vrt_b02 = tmp_dir / "B02.vrt"
+            print("  Creando VRTs por banda…")
+            build_mosaic_vrt(vrt_b04, b04_list)
+            build_mosaic_vrt(vrt_b03, b03_list)
+            build_mosaic_vrt(vrt_b02, b02_list)
+            out_tif = out_dir / f"S2_RGB_10m_{yyyymmdd}_{orbit}.tif"
+            print("  Generando mosaico RGB…")
+            translate_rgb(vrt_b04, vrt_b03, vrt_b02, out_tif)
+            print(f"  Listo: {out_tif}")
 
     print("\nTerminado.")
 
