@@ -1,0 +1,24 @@
+name: s2-process
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.8
+  - pip
+  - numpy
+  - openpyxl
+  - opencv
+  - requests
+  - pyproj
+  - shapely
+  - certifi
+  - gdal=3.2.*
+  - curl
+  - setuptools
+  - wheel
+
+# Notas:
+# - Esta especificación usa paquetes de conda (canal conda-forge) para simplificar GDAL y OpenCV en Windows.
+# - Si prefieres usar un wheel local de GDAL (como GDAL-3.2.2-cp38-cp38-win_amd64.whl), primero elimina
+#   la línea 'gdal=3.2.*' de arriba y ejecuta tras crear/activar el entorno:
+#   pip install <ruta-al-wheel>\GDAL-3.2.2-cp38-cp38-win_amd64.whl
