@@ -71,6 +71,7 @@ def build_cog(
     area: dict[str, Any],
     target_epsg: str = "EPSG:32631",
 ) -> Path | None:
+    print("[COG] build_cog v2 — con fix bandas: VRT [B02,B03,B04,B08] -> COG -b 3 -b 2 -b 1 -b 4 -> [B04,B03,B02,B08]")
     output_path = Path(output_path)
     output_path.parent.mkdir(parents=True, exist_ok=True)
 
@@ -148,6 +149,7 @@ def build_cog(
     stack_opts = gdal.BuildVRTOptions(separate=True, VRTNodata=0)
     gdal.BuildVRT(str(stack_vrt), stack_srcs, options=stack_opts)
 
+    print("[COG] gdal_translate: VRT(1=B02,2=B03,3=B04,4=B08) -> COG(1=B04,2=B03,3=B02,4=B08)  via -b 3 -b 2 -b 1 -b 4")
     subprocess.run([
         "gdal_translate", str(stack_vrt), str(output_path),
         "-b", "3", "-b", "2", "-b", "1", "-b", "4",
@@ -160,9 +162,10 @@ def build_cog(
         "-colorinterp_3", "blue",
         "-colorinterp_4", "undefined",
     ], check=True)
+    print("[COG] OK")
 
     gdal.SetConfigOption("GDAL_DISABLE_READDIR_ON_OPEN", None)
     shutil.rmtree(work_dir, ignore_errors=True)
     size_mb = output_path.stat().st_size / 1e6
-    print(f"  -> {output_path.name}  ({size_mb:.0f} MB)")
+    print(f"[COG] -> {output_path.name}  ({size_mb:.0f} MB)")
     return output_path

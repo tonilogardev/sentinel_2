@@ -10,5 +10,6 @@ services:
       - ./configs:/workspace/configs
       - ./input:/workspace/input
       - ./output:/workspace/output
+      - ./src:/workspace/src
     working_dir: /workspace
     command: ["/workspace/configs/pipeline.json"]
