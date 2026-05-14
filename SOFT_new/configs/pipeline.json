@@ -1,0 +1,72 @@
+{
+    "description": "Configuració del pipeline S2-PROCESS per a Catalunya",
+
+    "api": {
+        "downloadURL": "https://catalogue.dataspace.copernicus.eu/",
+        "authentificationURL": "https://identity.dataspace.copernicus.eu/"
+    },
+
+    "pipeline": {
+        "timeSleep": 3600,
+        "productL1Cgeneration": "YES",
+        "AllowedInnerzerosproductL2A": "NO",
+        "onlyLastBaselineForGranule": "YES",
+        "checkTwoDatastrips": "YES",
+        "twoDatastripsThreshold": 0.95,
+        "twoDatastripsWaitingTime": 86400
+    },
+
+    "area": {
+        "polySearch": "POLYGON((0.1873941083836813 40.46212014624089,3.6319312482049257 40.46212014624089,3.6319312482049257 42.91398496782941,0.1873941083836813 42.91398496782941,0.1873941083836813 40.46212014624089))",
+        "limitsUTM": {
+            "R051": [240000, 467500, 4780000, 4480000],
+            "R008": [300000, 540000, 4780000, 4480000]
+        },
+        "perOrbitZoneUTM": {
+            "R051": "T31",
+            "R008": "T31"
+        },
+        "granulesPerOrbit": {
+            "R051": [
+                "T30TYN", "T31TBE", "T31TBF", "T31TBG", "T31TCE",
+                "T31TCF", "T31TCG", "T31TCH", "T31TDF", "T31TDG", "T31TDH"
+            ],
+            "R008": [
+                "T31TBE", "T31TCE", "T31TCF", "T31TCG", "T31TCH",
+                "T31TDE", "T31TDF", "T31TDG", "T31TDH",
+                "T31TEE", "T31TEF", "T31TEG", "T31TEH"
+            ]
+        },
+        "granulesToCheckArea": {
+            "R051": ["T31TCH", "T31TBE", "T31TBF", "T31TBG", "T30TYN"],
+            "R008": ["T31TDE", "T31TDF", "T31TDG", "T31TDH"]
+        },
+        "areaForGranulesToCheck": {
+            "R051": 12037,
+            "R008": 12065
+        }
+    },
+
+    "workspace": {
+        "workingFolder": "/workspace/output",
+        "quicklookDir": "/workspace/output/quicklooks",
+        "sen2cor": {
+            "bin": "/opt/sen2cor/L2A_Process",
+            "gippPath": "/workspace/configs/L2A_GIPP.xml"
+        }
+    },
+
+    "satellites": {
+        "platforms": ["S2A", "S2B", "S2C"],
+        "legacyPlatforms": ["S2A", "S2B"]
+    },
+
+    "dateRange": {
+        "start": "2026-04-21",
+        "end": "2026-04-21"
+    },
+
+    "orbits": ["R051"],
+
+    "segments": []
+}

@@ -1,0 +1,14 @@
+services:
+  s2:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: s2_process
+    env_file:
+      - .env
+    volumes:
+      - ./configs:/workspace/configs
+      - ./input:/workspace/input
+      - ./output:/workspace/output
+    working_dir: /workspace
+    command: ["/workspace/configs/pipeline.json"]

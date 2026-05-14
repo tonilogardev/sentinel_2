@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.backends._legacy:_Backend"
+
+[project]
+name = "s2-process"
+version = "7.4.0"
+description = "Sentinel-2 processing pipeline (S2-PROCESS improved)"
+requires-python = ">=3.10"
+dependencies = [
+    "numpy",
+    "opencv-python-headless",
+    "requests",
+    "boto3",
+    "botocore",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[project.scripts]
+s2-process = "s2_process.main:run_pipeline"
