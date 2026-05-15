@@ -3,7 +3,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: s2_process
+    image: s2-process-v3
+    container_name: s2_process_v3
     env_file:
       - .env
     volumes:

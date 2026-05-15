@@ -13,7 +13,7 @@ from osgeo_utils.gdal_calc import Calc
 
 from s2_process.download.s3_downloader import BANDS_L1C_4B, discover_and_download
 
-STACK_BANDS = ["B02", "B03", "B04", "B08"]
+STACK_BANDS = ["B04", "B03", "B02", "B08"]
 
 BAND_INDEX_MAP = {"B01": 1, "B02": 2, "B03": 3, "B04": 4,
                    "B05": 5, "B06": 6, "B07": 7, "B08": 8,
@@ -71,7 +71,7 @@ def build_cog(
     area: dict[str, Any],
     target_epsg: str = "EPSG:32631",
 ) -> Path | None:
-    print("[COG] build_cog v2 — con fix bandas: VRT [B02,B03,B04,B08] -> COG -b 3 -b 2 -b 1 -b 4 -> [B04,B03,B02,B08]")
+    print("[COG] build_cog v3 — stack VRT en orden [B04,B03,B02,B08] = [Red,Green,Blue,NIR]")
     output_path = Path(output_path)
     output_path.parent.mkdir(parents=True, exist_ok=True)
 
@@ -149,10 +149,9 @@ def build_cog(
     stack_opts = gdal.BuildVRTOptions(separate=True, VRTNodata=0)
     gdal.BuildVRT(str(stack_vrt), stack_srcs, options=stack_opts)
 
-    print("[COG] gdal_translate: VRT(1=B02,2=B03,3=B04,4=B08) -> COG(1=B04,2=B03,3=B02,4=B08)  via -b 3 -b 2 -b 1 -b 4")
+    print("[COG] gdal_translate: VRT -> COG")
     subprocess.run([
         "gdal_translate", str(stack_vrt), str(output_path),
-        "-b", "3", "-b", "2", "-b", "1", "-b", "4",
         "-of", "COG",
         "-co", "COMPRESS=LZW",
         "-co", "PREDICTOR=STANDARD",
@@ -163,6 +162,28 @@ def build_cog(
         "-colorinterp_4", "undefined",
     ], check=True)
     print("[COG] OK")
+
+    print(f"[COG] FIX band swap: B1<->B3 -> {output_path.stem}_def.btf")
+    fixed_path = output_path.parent / f"{output_path.stem}_def.btf"
+    subprocess.run([
+        "gdal_translate", str(output_path), str(fixed_path),
+        "-b", "3", "-b", "2", "-b", "1", "-b", "4",
+        "-of", "COG",
+        "-co", "COMPRESS=LZW",
+        "-co", "PREDICTOR=STANDARD",
+        "-co", "BIGTIFF=YES",
+        "-colorinterp_1", "red",
+        "-colorinterp_2", "green",
+        "-colorinterp_3", "blue",
+        "-colorinterp_4", "undefined",
+    ], check=True)
+    print("[COG] FIX OK")
+    print(f"[COG] Delete intermediate {output_path.name}")
+    output_path.unlink()
+    print(f"[COG] Rename {fixed_path.name} -> {output_path.name}")
+    fixed_path.rename(output_path)
+
+    subprocess.run(["gdalinfo", "-stats", str(output_path)], check=True)
 
     gdal.SetConfigOption("GDAL_DISABLE_READDIR_ON_OPEN", None)
     shutil.rmtree(work_dir, ignore_errors=True)

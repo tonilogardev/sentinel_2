@@ -43,7 +43,7 @@ def _step_timed(label: str, seg_folder: Path, fn, *args, **kwargs) -> bool:
         raise
 
 
-COG_VERSION = "v2"  # v1: sin fix bandas. v2: -b 3 -b 2 -b 1 -b 4 -> [B04,B03,B02,B08]
+COG_VERSION = "v5"  # v5: COG + post-fix B1<->B3 + delete intermediate + rename
 
 
 def run_pipeline(config_path: str | Path) -> None:
@@ -61,8 +61,8 @@ def run_pipeline(config_path: str | Path) -> None:
     state_file = workspace / STATE_FILE
     tracker = StateTracker.from_file(state_file, config)
 
-    _log(workspace, f"SOFT_new COG{COG_VERSION} — fix bandas: VRT [B02,B03,B04,B08] -> COG -b 3 -b 2 -b 1 -b 4 -> [B04,B03,B02,B08]")
-    print(f"!!! VERSION MARKER: COG{COG_VERSION} — fix bandas activo")
+    _log(workspace, f"SOFT_new COG{COG_VERSION} — post-fix B1<->B3 + plataforma en nombre")
+    print(f"!!! VERSION MARKER: COG{COG_VERSION} — post-fix + plataforma en nombre")
 
     while not tracker.all_done():
         segment = tracker.first_pending()
@@ -134,7 +134,7 @@ def _step_l1c(
     target_epsg: str,
 ) -> bool:
     """Build single COG from S3 via /vsis3/."""
-    _log(seg_folder, f"  COG {COG_VERSION}: -b 3 -b 2 -b 1 -b 4 — B04 en banda1, B03 en banda2, B02 en banda3, B08 en banda4")
+    _log(seg_folder, f"  COG {COG_VERSION}: COG + post-fix B1<->B3 + delete intermedio + rename")
     products_file = seg_folder / "products.json"
     if not products_file.exists():
         _log(seg_folder, "  No products file — nothing to process")
@@ -149,7 +149,8 @@ def _step_l1c(
         return False
 
     compact = date.replace("-", "")
-    scene = f"S2_L1C_{orbit}_{compact}"
+    platform = products[0]["Name"].split("_")[0]
+    scene = f"{platform}_L1C_{orbit}_{compact}"
     out_path = seg_folder / f"{scene}.btf"
 
     if out_path.exists():
