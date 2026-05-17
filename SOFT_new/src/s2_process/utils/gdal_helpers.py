@@ -52,9 +52,24 @@ def build_vrt_separate(
     bounds: tuple[float, float, float, float] | None = None,
     epsg: str | None = None,
 ) -> str:
+    """Stack single-band files into a multi-band VRT."""
     cmd = ["gdalbuildvrt", "-separate", "-overwrite"]
     if epsg:
         cmd += ["-a_srs", epsg]
+    if bounds:
+        cmd += ["-te"] + [str(b) for b in bounds]
+    cmd += [output_vrt] + input_files
+    subprocess.run(cmd, check=True)
+    return output_vrt
+
+
+def build_vrt_mosaic(
+    input_files: list[str],
+    output_vrt: str,
+    bounds: tuple[float, float, float, float] | None = None,
+) -> str:
+    """Mosaic multi-band files preserving all bands."""
+    cmd = ["gdalbuildvrt", "-overwrite"]
     if bounds:
         cmd += ["-te"] + [str(b) for b in bounds]
     cmd += [output_vrt] + input_files

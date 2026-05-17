@@ -6,40 +6,68 @@ from pathlib import Path
 
 from osgeo import gdal
 
-from s2_process.utils.gdal_helpers import build_vrt_separate, translate_to_cog
+from s2_process.utils.gdal_helpers import build_vrt_mosaic, translate_to_cog
+
+
+def _granule_and_id(safe_dir: Path) -> tuple[str, str]:
+    granule_dir = next((safe_dir / "GRANULE").iterdir())
+    gname = granule_dir.name
+    sample_jp2 = next(granule_dir.rglob("*_SCL_*.jp2"), None)
+    if sample_jp2:
+        band_id = sample_jp2.name.replace("_SCL_20m.jp2", "").replace("_SCL_60m.jp2", "")
+    else:
+        band_id = gname.split("_", 1)[1] if "_" in gname else gname
+    return gname, band_id
 
 
 def extract_scl_granule(
     safe_dir: str | Path,
-    granule_name: str,
-    granule_id: str,
     work_dir: str | Path,
-) -> str:
+) -> str | None:
+    safe_dir = Path(safe_dir)
     work_dir = Path(work_dir)
-    file_in = f"{safe_dir}/GRANULE/{granule_name}/IMG_DATA/R20m/{granule_id[:22]}_SCL_20m.jp2"
-    file_out = str(work_dir / f"{granule_id}_SCL.tif")
+    work_dir.mkdir(parents=True, exist_ok=True)
 
-    warp_options = gdal.WarpOptions(
+    granule_name, band_id = _granule_and_id(safe_dir)
+    jp2_path = safe_dir / "GRANULE" / granule_name / "IMG_DATA" / "R20m" / f"{band_id}_SCL_20m.jp2"
+
+    if not jp2_path.exists():
+        return None
+
+    out_tif = str(work_dir / f"{band_id}_SCL.tif")
+    gdal.Warp(
+        out_tif, str(jp2_path),
         xRes=10.0, yRes=10.0, targetAlignedPixels=True,
         srcNodata=0, dstNodata=0, format="GTiff",
+        creationOptions=["COMPRESS=LZW", "TILED=YES"],
     )
-    gdal.Warp(file_out, file_in, options=warp_options)
-    return file_out
+    return out_tif
 
 
-def mosaic_scl(
-    scl_tifs: list[str],
-    output_name: str,
+def build_scl_mosaic(
+    safe_dirs: list[Path],
+    output_path: str | Path,
     work_dir: str | Path,
-    limits: tuple[float, float, float, float] | None = None,
-) -> str:
+    limits: list[float] | None = None,
+) -> Path | None:
+    output_path = Path(output_path)
     work_dir = Path(work_dir)
-    vrt_path = str(work_dir / f"{output_name}.vrt")
-    bounds = (limits[0], limits[2], limits[1], limits[3]) if limits else None
-    build_vrt_separate(scl_tifs, vrt_path, bounds=bounds)
+    work_dir.mkdir(parents=True, exist_ok=True)
 
-    cog_path = str(work_dir / f"{output_name}.tif")
-    translate_to_cog(vrt_path, cog_path)
+    scl_tifs: list[str] = []
+    for safe_dir in safe_dirs:
+        tif = extract_scl_granule(safe_dir, work_dir)
+        if tif:
+            scl_tifs.append(tif)
 
+    if not scl_tifs:
+        return None
+
+    bounds = (limits[0], limits[3], limits[1], limits[2]) if limits else None
+    vrt_path = str(work_dir / f"{output_path.stem}.vrt")
+    build_vrt_mosaic(scl_tifs, vrt_path, bounds=bounds)
+
+    translate_to_cog(vrt_path, str(output_path))
     Path(vrt_path).unlink(missing_ok=True)
-    return cog_path
+
+    return output_path

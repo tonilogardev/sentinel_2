@@ -11,6 +11,9 @@ from typing import Any
 from s2_process.config import load_config
 from s2_process.download.dataspace_client import DataSpaceClient
 from s2_process.processing.cog_builder import build_cog
+from s2_process.processing.l2a_generator import run_sen2cor_group, find_l2a_safes
+from s2_process.processing.l2a_10b_mosaic import build_l2a_mosaic
+from s2_process.processing.scl_extractor import build_scl_mosaic
 from s2_process.utils.state_tracker import StateTracker
 
 
@@ -83,6 +86,12 @@ def run_pipeline(config_path: str | Path) -> None:
                              client, seg_folder, date, orbit, poly_search, area)
         elif step == "l1c_processed":
             ok = _step_timed("l1c_cog", seg_folder, _step_l1c,
+                             seg_folder, date, orbit, area, target_epsg)
+        elif step == "l2a_generated":
+            ok = _step_timed("l2a_generate", seg_folder, _step_l2a_generate,
+                             seg_folder, date, orbit, area, config)
+        elif step == "l2a_processed":
+            ok = _step_timed("l2a_process", seg_folder, _step_l2a_process,
                              seg_folder, date, orbit, area, target_epsg)
         else:
             _log(seg_folder, f"  Step {step} — not yet implemented")
@@ -160,6 +169,76 @@ def _step_l1c(
 
     result = build_cog(products, out_path, orbit, area, target_epsg)
     return result is not None
+
+
+def _step_l2a_generate(
+    seg_folder: Path,
+    date: str,
+    orbit: str,
+    area: dict[str, Any],
+    config: dict[str, Any],
+) -> bool:
+    products_file = seg_folder / "products.json"
+    if not products_file.exists():
+        return False
+
+    import json
+    with open(products_file) as f:
+        products = json.load(f)
+
+    granules = area.get("granulesPerOrbit", {}).get(orbit, [])
+    filtered = [p for p in products if p["Name"].split("_")[5] in granules]
+    if not filtered:
+        return False
+
+    ok = run_sen2cor_group(seg_folder, filtered, config, "L2A_GIPP_NO_DEM.xml", "l2a_nodem")
+    return ok
+
+
+def _step_l2a_process(
+    seg_folder: Path,
+    date: str,
+    orbit: str,
+    area: dict[str, Any],
+    target_epsg: str,
+) -> bool:
+    products_file = seg_folder / "products.json"
+    if not products_file.exists():
+        return False
+
+    import json
+    with open(products_file) as f:
+        products = json.load(f)
+
+    granules = area.get("granulesPerOrbit", {}).get(orbit, [])
+    filtered = [p for p in products if p["Name"].split("_")[5] in granules]
+    if not filtered:
+        return False
+
+    limits = area.get("limitsUTM", {}).get(orbit, [240000, 467500, 4780000, 4480000])
+    compact = date.replace("-", "")
+    platform = filtered[0]["Name"].split("_")[0]
+    scene = f"{platform}_L2A_{orbit}_{compact}"
+    out_path = seg_folder / f"{scene}.btf"
+    scl_out = seg_folder / f"{platform}_SCL_{orbit}_{compact}.tif"
+
+    if out_path.exists():
+        return True
+
+    safes_map = find_l2a_safes(seg_folder, filtered, "l2a_nodem")
+    if not safes_map:
+        return False
+
+    work_dir = seg_folder / f"tmp_l2a_{compact}"
+    work_dir.mkdir(parents=True, exist_ok=True)
+
+    l2a_ok = build_l2a_mosaic(list(safes_map.values()), str(out_path), str(work_dir), limits)
+
+    scl_ok = build_scl_mosaic(list(safes_map.values()), str(scl_out), str(work_dir), limits)
+
+    import shutil
+    shutil.rmtree(work_dir, ignore_errors=True)
+    return l2a_ok is not None
 
 
 if __name__ == "__main__":

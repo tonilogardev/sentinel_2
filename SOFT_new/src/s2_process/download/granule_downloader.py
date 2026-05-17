@@ -26,7 +26,7 @@ def download_product(
     max_retries: int = 3,
 ) -> bool:
     destination = Path(destination)
-    token = client.token_mgr.access_token
+    token = client._ensure_token()
     url = client.get_download_url(product_id)
     checksum_web = client.get_checksum(product_id)
 
