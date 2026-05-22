@@ -1,116 +1,73 @@
-# SOFT_new — Pipeline S2-PROCESS
+# Pipeline Sentinel-2 Modernizado (SOFT_new)
 
 ## Index
 
-1. [Overview](#1-overview)
-2. [Pipeline Flow](#2-pipeline-flow)
-3. [Configuration](#3-configuration)
-4. [Run](#4-run)
-5. [Band Order & Color Interpretation](#5-band-order--color-interpretation)
-6. [Key Files](#6-key-files)
-7. [Next steps](#7-next-steps)
+1. [Estructura Limpia del Directorio de Salida](#1-estructura-limpia-del-directorio-de-salida)
+2. [Descripción Cronológica de Salidas por Etapa](#2-descripción-cronológica-de-salidas-por-etapa)
+3. [Instrucciones de Ejecución Local en Windows](#3-instrucciones-de-ejecución-local-en-windows)
+4. [Pasos Siguientes](#4-pasos-siguientes)
 
 ---
 
-## 1 Overview
+## 1 Estructura Limpia del Directorio de Salida
 
-Migrate ICGC S2-PROCESS from Excel + full `.SAFE` downloads to a **Python pipeline** that reads Sentinel-2 bands directly from **Copernicus DataSpace S3** and outputs a **single COG (`.btf`)** per orbit+date.
-
-- ***Language***: Python 3 (GDAL, boto3)
-- ***Runtime***: Docker container (`ghcr.io/osgeo/gdal:ubuntu-small-latest`)
-- ***Input***: JP2 bands from S3 (boto3 download → local)
-- ***Output***: `S2_L1C_{orbit}_{compactDate}.btf` (COG, UInt16, 4 bands)
-- ***Secrets***: `.env` file (AWS credentials)
-- ***Config***: `pipeline.json` (no Excel)
-
-[←Index](#index)
-
-## 2 Pipeline Flow
-
-- ***Download***: `discover_and_download()` → for each tile, download 4 JP2 bands (B02, B03, B04, B08) from S3 + MTD_DS.xml for offset/gain.
-- ***Offset/Gain Correction***: `_correct_band()` → `DN_out = DN_raw * 10000/gain + 10000*offset/gain` via `gdal_calc.Calc`.
-- ***Reprojection***: `_reproject_band()` (if tile UTM zone ≠ target) → `gdal.Warp` cubic, 10m, targetAlignedPixels.
-- ***Mosaic***: Per-band VRT → Stack VRT (`separate=True`) → `gdal_translate` to COG with `-b` reorder + color interpretation.
-- ***Cleanup***: Temp directory deleted after COG creation.
+- ***Instrucción***: Todos los archivos generados y el motor de procesamiento (Sen2Cor) residen estrictamente bajo el directorio de trabajo limpio [SOFT_new/](../SOFT_new/). Bajo ningún concepto se utilizarán las rutas del software clásico [SOFT/](../SOFT/).
+- ***Árbol de Directorios Generados***:
+  El árbol de directorios de salida está estructurado y pre-inicializado de la siguiente manera:
+  ```text
+  SOFT_new/
+  ├── Sen2Cor-02.12.03-win64/ <-- Procesador atmosférico y topográfico (Motor local)
+  └── output/
+      ├── QuickLooks/   <-- Vistas rápidas finales de alta calidad (RGB y RGBI)
+      ├── segments/     <-- Directorios por segmento con mosaicos, capas SCL y NDVI
+      └── logs/         <-- Archivos de log dedicados creados por cada sesión
+  ```
+- ***File References***:
+  - Directorio principal de salidas: [output/](../SOFT_new/output/)
+  - Destino de QuickLooks de Alta Calidad: [QuickLooks/](../SOFT_new/output/QuickLooks/)
+  - Destino de Mosaicos y Segmentos: [segments/](../SOFT_new/output/segments/)
+  - Directorio de Logs del Sistema: [logs/](../SOFT_new/output/logs/)
 
 [←Index](#index)
 
-## 3 Configuration
+## 2 Descripción Cronológica de Salidas por Etapa
 
-Edit [`../SOFT_new/configs/pipeline.json`](../SOFT_new/configs/pipeline.json):
-
-- ***`orbits`***: List of orbit numbers (e.g. `["R051"]`).
-- ***`dateRange`***: `start` / `end` in `YYYY-MM-DD`.
-- ***`area.limitsUTM`***: Per-orbit extent `[xmin, xmax, ymax, ymin]`.
-- ***`area.granulesPerOrbit`***: List of tile IDs for each orbit.
-- ***`satellites.platforms`***: `["S2A", "S2B", "S2C"]`.
-
-Set credentials in [`../SOFT_new/.env`](../SOFT_new/.env):
-
-```
-AWS_S3_ENDPOINT=eodata.dataspace.copernicus.eu
-AWS_ACCESS_KEY_ID=your_key
-AWS_SECRET_ACCESS_KEY=your_secret
-```
+- ***Instrucción***: Sigue el flujo batch secuencial diario y órbita por órbita para revisar las salidas que se van almacenando progresivamente.
+- ***Flujo Cronológico de Salidas***:
+  1. **Etapa 1: Descarga**: Guarda los gránulos comprimidos de Copernicus en [segments/[Fecha]_[Orbita]/ZIP/](../SOFT_new/output/segments/).
+  2. **Etapa 2: Máscaras e Imagen L1C**: Genera las máscaras vectoriales y raster en [segments/[Fecha]_[Orbita]/MASK/](../SOFT_new/output/segments/) y el mosaico opcional calibrado `S2[A/B]_L1C_[Orbita]_[FechaCompacta].btf` en la raíz de su carpeta de segmento.
+  3. **Etapa 4: Mosaico L2A y SCL (sin DEM)**: Ejecuta Sen2Cor localmente y genera el mosaico calibrado de reflectancia de 10 bandas `S2[A/B]_L2A_[Orbita]_[FechaCompacta].btf` y la clasificación de suelo remuestreada a 10m `S2[A/B]_SCL_[Orbita]_[FechaCompacta].tif` dentro de su segmento.
+  4. **Etapa 5: QuickLooks**: Genera en el directorio centralizado [QuickLooks/](../SOFT_new/output/QuickLooks/) las vistas rápidas finales:
+     - `S2_RGB_8b_[Fecha]_[Orbita].tif` (RGB de 8 bits comprimido con JPEG 75).
+     - `S2_RGBI_16b_[Fecha]_[Orbita].btf` (RGBI de 16 bits comprimido con LZW).
+  5. **Etapa 7: Mosaico L2A DEMCAT y NDVI**: Genera el mosaico corregido con relieve `S2[A/B]_L2A_[Orbita]_[FechaCompacta]_DEMCAT.btf` y el índice de vegetación re-escalado a Byte de la ICGC `S2[A/B]_NDVI_[Orbita]_[FechaCompacta].tif` en la carpeta de segmento.
+- ***File References***:
+  - Módulo principal orquestador: [main.py](../SOFT_new/src/s2_process/main.py)
+  - Módulo de QuickLooks: [quicklook_generator.py](../SOFT_new/src/s2_process/processing/quicklook_generator.py)
+  - Configuración del pipeline: [pipeline.json](../SOFT_new/pipeline.json)
 
 [←Index](#index)
 
-## 4 Run
+## 3 Instrucciones de Ejecución Local en Windows
 
-From the project root:
-
-```bash
-docker compose -f SOFT_new/docker-compose.yml run --rm s2
-```
-
-The container:
-1. Reads `pipeline.json` config.
-2. Searches Copernicus DataSpace for matching products.
-3. Downloads JP2 bands via **boto3** (S3 path-style, `AWS_VIRTUAL_HOSTING=NO`).
-4. Applies offset/gain correction per tile.
-5. Reprojects tiles not in target UTM zone.
-6. Builds VRT mosaic and translates to COG.
-7. Output: `output/{date}_{orbit}/S2_L1C_{orbit}_{compactDate}.btf`.
-
-- ***First run*** downloads ~1.1 GB (4 bands × 11 tiles). Subsequent runs use cached JP2s.
-- ***`gdal_translate` COG creation*** takes ~2-3 minutes.
+- ***Instrucción***: Ejecuta los comandos nativos en la consola Conda de Windows sin usar contenedores Docker.
+- ***Pasos de Ejecución***:
+  1. Abre tu terminal de **Anaconda Prompt** o **Miniconda**.
+  2. Activa tu entorno de ejecución de Conda preferido.
+  3. Desplázate al directorio raíz de la nueva aplicación:
+     ```powershell
+     cd f:\Disc_F\Orto_S2_CAT\antonio\open_code_project\SOFT_new
+     ```
+  4. Lanza el script de testeo interactivo para validar las librerías del entorno e iniciar una ejecución:
+     ```powershell
+     python test_pipeline.py
+     ```
+- ***File References***:
+  - Script de testeo y ayuda interactiva: [test_pipeline.py](../SOFT_new/test_pipeline.py)
+  - Archivo de variables de entorno con credenciales: [.env](../SOFT_new/.env)
 
 [←Index](#index)
 
-## 5 Band Order & Color Interpretation
+## 4 Pasos Siguientes
 
-The final COG matches **SOFT reference** pixel-perfect:
-
-| COG Band | Label | Sentinel-2 Band | Physical |
-|----------|-------|-----------------|----------|
-| 1 | Red | B04 | Red (665 nm) |
-| 2 | Green | B03 | Green (560 nm) |
-| 3 | Blue | B02 | Blue (490 nm) |
-| 4 | Undefined | B08 | NIR (842 nm) |
-
-The stack VRT order is `[B02, B03, B04, B08]` but `gdal_translate -b 3 -b 2 -b 1 -b 4` reorders to `[B04, B03, B02, B08]` so color labels match the actual spectral bands.
-
-[←Index](#index)
-
-## 6 Key Files
-
-- [../SOFT_new/src/s2_process/main.py](../SOFT_new/src/s2_process/main.py) — Pipeline orchestrator, step timing, state tracker.
-- [../SOFT_new/src/s2_process/processing/cog_builder.py](../SOFT_new/src/s2_process/processing/cog_builder.py) — Core COG generation: correction, reprojection, VRT stacking, `gdal_translate`.
-- [../SOFT_new/src/s2_process/download/s3_downloader.py](../SOFT_new/src/s2_process/download/s3_downloader.py) — S3 discovery and JP2 download per tile.
-- [../SOFT_new/src/s2_process/utils/offset_gain.py](../SOFT_new/src/s2_process/utils/offset_gain.py) — Parse `MTD_DS.xml` for RADIO_ADD_OFFSET and QUANTIFICATION_VALUE.
-- [../SOFT_new/src/s2_process/utils/state_tracker.py](../SOFT_new/src/s2_process/utils/state_tracker.py) — Persist pipeline state across runs.
-- [../SOFT_new/configs/pipeline.json](../SOFT_new/configs/pipeline.json) — Pipeline configuration.
-- [../SOFT_new/docker-compose.yml](../SOFT_new/docker-compose.yml) — Service definition.
-- [../SOFT_new/Dockerfile](../SOFT_new/Dockerfile) — GDAL + Python image.
-
-[←Index](#index)
-
-## 7 Next steps
-
-- Implement L2A generation (Sen2Cor).
-- Implement L2A processing, quicklook, DEMCat steps.
-- Validate pixel-level match for multiple dates and orbits.
-- Restore full date range in `pipeline.json`.
-- Add `gdal.UseExceptions()` to suppress FutureWarning.
-
-[←Index](#index)
+- Consulta la guía de políticas y requerimientos del negocio en [politica_negocio_SOFT.md](./politica_negocio_SOFT.md).

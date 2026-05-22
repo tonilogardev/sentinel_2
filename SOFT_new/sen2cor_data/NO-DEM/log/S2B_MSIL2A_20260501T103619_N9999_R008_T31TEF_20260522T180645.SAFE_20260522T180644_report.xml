@@ -1,0 +1,1547 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Sen2Cor_Level-2A_Report_File>
+<check>
+<inspection execution="2026-05-22T18:06:45.930" level=" INFO" process="38304" module="L2A_ProcessDataStrip" function="generate" line="366"/>
+<message contentType="Text">Progress[%]:  0.00 : Generating datastrip metadata</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:06:46.180" level="INFO" process="38304" module="L2A_XmlParser" function="validate" line="118"/>
+<message contentType="Text">validating metadata file MTD_DS.xml against scheme</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:06:46.980" level="INFO" process="38304" module="L2A_XmlParser" function="validate" line="124"/>
+<message contentType="Text">metadata file is valid</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:06:46.996" level="INFO" process="38304" module="L2A_ProcessDataStrip" function="generate" line="414"/>
+<message contentType="Text">datastrip directory is: f:\Disc_F\Orto_S2_CAT\antonio\open_code_project\SOFT_new\output\segments\2026-05-01_R008\S2B_MSIL2A_20260501T103619_N9999_R008_T31TEF_20260522T180645.SAFE\DATASTRIP\DS_2BPS_20260522T180646_S20260501T104430</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:06:48.696" level="INFO" process="38304" module="L2A_XmlParser" function="validate" line="118"/>
+<message contentType="Text">validating metadata file MTD_DS.xml against scheme</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:06:49.601" level=" INFO" process="38304" module="L2A_XmlParser" function="validate" line="127"/>
+<message contentType="Text">Syntax error in metadata, see report file for details.</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:06:49.601" level="ERROR" process="38304" module="L2A_XmlParser" function="validate" line="128"/>
+<message contentType="Text">Schema file: S2-PDGS-TAS-DI-PSD-V14.9_Schema\S2_PDI_Level-2A_Datastrip_Metadata.xsd</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:06:49.601" level="ERROR" process="38304" module="L2A_XmlParser" function="validate" line="129"/>
+<message contentType="Text">Details: Element 'GIPP_FILENAME', attribute 'type': [facet 'enumeration'] The value 'GIP_HRTPAR' is not an element of the set {'GIP_ATMIMA', 'GIP_ATMSAD', 'GIP_DATATI', 'GIP_LREXTR', 'GIP_INVLOC', 'GIP_VIEDIR', 'GIP_SPAMOD', 'GIP_BLINDP', 'GIP_CLOINV', 'GIP_PRDLOC', 'GIP_R2PARA', 'GIP_R2SWIR', 'GIP_R2EOB2', 'GIP_R2EQOG', 'GIP_R2DEPI', 'GIP_R2DEFI', 'GIP_R2WAFI', 'GIP_R2L2NC', 'GIP_R2DENT', 'GIP_R2DECT', 'GIP_R2NOMO', 'GIP_R2ABCA', 'GIP_R2BINN', 'GIP_R2CRCO', 'GIP_G2PARA', 'GIP_G2PARE', 'GIP_EARMOD', 'GIP_GEOPAR', 'GIP_INTDET', 'GIP_TILPAR', 'GIP_RESPAR', 'GIP_MASPAR', 'GIP_JP2KPA', 'GIP_ECMWFP', 'GIP_DECOMP', 'GIP_OLQCPA', 'GIP_PROBAS', 'GIP_CONVER', 'GIP_L2AUSR', 'GIP_L2ACSC', 'GIP_L2ACAC', 'GIP_PROBA2', 'GIP_CLOPAR'}.</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:06:49.763" level=" INFO" process="38304" module="L2A_ProcessDataStrip" function="generate" line="441"/>
+<message contentType="Text">L2A datastrip successfully generated</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:06:50.155" level="INFO" process="38304" module="L2A_Config" function="create_L2A_Tile" line="4118"/>
+<message contentType="Text">L2A tile directory is: f:\Disc_F\Orto_S2_CAT\antonio\open_code_project\SOFT_new\output\segments\2026-05-01_R008\S2B_MSIL2A_20260501T103619_N9999_R008_T31TEF_20260522T180645.SAFE\GRANULE\L2A_T31TEF_A047796_20260501T104430</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:06:50.190" level="INFO" process="38304" module="L2A_Logger" function="__init__" line="92"/>
+<message contentType="Text">logging for the main process initialized</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:06:50.190" level=" INFO" process="38304" module="L2A_ProcessTileToolbox" function="process" line="114"/>
+<message contentType="Text">Selected resolution: 10 m</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:06:50.440" level="INFO" process="38304" module="L2A_XmlParser" function="validate" line="118"/>
+<message contentType="Text">validating metadata file MTD_DS.xml against scheme</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:06:51.224" level="INFO" process="38304" module="L2A_XmlParser" function="validate" line="124"/>
+<message contentType="Text">metadata file is valid</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:06:51.224" level="INFO" process="38304" module="L2A_Config" function="readPreferences" line="4482"/>
+<message contentType="Text">input product origins from: Sentinel-2B</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:06:51.224" level="INFO" process="38304" module="L2A_XmlParser" function="validate" line="118"/>
+<message contentType="Text">validating metadata file L2A_CAL_SC_GIPP.xml against scheme</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:06:51.224" level="INFO" process="38304" module="L2A_XmlParser" function="validate" line="124"/>
+<message contentType="Text">metadata file is valid</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:06:51.224" level="INFO" process="38304" module="L2A_XmlParser" function="validate" line="118"/>
+<message contentType="Text">validating metadata file L2A_CAL_AC_GIPP.xml against scheme</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:06:51.240" level="INFO" process="38304" module="L2A_XmlParser" function="validate" line="124"/>
+<message contentType="Text">metadata file is valid</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:06:51.240" level="INFO" process="38304" module="L2A_XmlParser" function="validate" line="118"/>
+<message contentType="Text">validating metadata file L2A_GIPP.xml against scheme</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:06:51.240" level="INFO" process="38304" module="L2A_XmlParser" function="validate" line="124"/>
+<message contentType="Text">metadata file is valid</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:06:51.940" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 0.10 : PID-38304, L2A_ProcessTile: 20 m resolution must be processed first, elapsed time[s]: 1.750, total: 0:00:07.700000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:06:52.196" level="INFO" process="38304" module="L2A_XmlParser" function="validate" line="118"/>
+<message contentType="Text">validating metadata file MTD_DS.xml against scheme</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:06:53.015" level="INFO" process="38304" module="L2A_XmlParser" function="validate" line="124"/>
+<message contentType="Text">metadata file is valid</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:06:53.025" level="INFO" process="38304" module="L2A_Config" function="readPreferences" line="4482"/>
+<message contentType="Text">input product origins from: Sentinel-2B</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:06:53.025" level="INFO" process="38304" module="L2A_XmlParser" function="validate" line="118"/>
+<message contentType="Text">validating metadata file L2A_CAL_SC_GIPP.xml against scheme</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:06:53.025" level="INFO" process="38304" module="L2A_XmlParser" function="validate" line="124"/>
+<message contentType="Text">metadata file is valid</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:06:53.025" level="INFO" process="38304" module="L2A_XmlParser" function="validate" line="118"/>
+<message contentType="Text">validating metadata file L2A_CAL_AC_GIPP.xml against scheme</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:06:53.025" level="INFO" process="38304" module="L2A_XmlParser" function="validate" line="124"/>
+<message contentType="Text">metadata file is valid</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:06:53.025" level="INFO" process="38304" module="L2A_XmlParser" function="validate" line="118"/>
+<message contentType="Text">validating metadata file L2A_GIPP.xml against scheme</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:06:53.039" level="INFO" process="38304" module="L2A_XmlParser" function="validate" line="124"/>
+<message contentType="Text">metadata file is valid</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:06:53.780" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 0.21 : PID-38304, L2A_ProcessTile: processing with resolution 20 m, elapsed time[s]: 1.836, total: 0:00:09.536000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:06:53.788" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 0.21 : PID-38304, L2A_ProcessTile: start of pre processing, elapsed time[s]: 0.008, total: 0:00:09.544000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:06:53.789" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="preprocess" line="225"/>
+<message contentType="Text">pre-processing with resolution 20 m</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:06:53.790" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="preprocess" line="230"/>
+<message contentType="Text">checking configuration</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:06:53.790" level="INFO" process="38304" module="L2A_XmlParser" function="validate" line="118"/>
+<message contentType="Text">validating metadata file MTD_TL.xml against scheme</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:06:53.855" level="INFO" process="38304" module="L2A_XmlParser" function="validate" line="124"/>
+<message contentType="Text">metadata file is valid</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:06:53.864" level="INFO" process="38304" module="L2A_Config" function="setOzoneContentFromMetadata" line="5529"/>
+<message contentType="Text">ozone mean value is: 345.412492258</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:06:53.864" level="INFO" process="38304" module="L2A_Config" function="createAtmDataFilename" line="5472"/>
+<message contentType="Text">Ozone_Content is set to h with 14.412492 least difference to input value</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:06:53.864" level="INFO" process="38304" module="L2A_Config" function="createAtmDataFilename" line="5475"/>
+<message contentType="Text">generated file name for look up tables is: h99000_wv20_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:06:53.864" level="INFO" process="38304" module="L2A_Config" function="createAtmDataFilename" line="5481"/>
+<message contentType="Text">look up table for S2B found and used</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:06:53.875" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 0.21 : PID-38304, L2A_Tables: start import, elapsed time[s]: 0.080, total: 0:00:09.624000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:06:54.819" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 0.27 : PID-38304, L2A_Tables: band B01 imported, elapsed time[s]: 0.953, total: 0:00:10.577000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:06:59.267" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 0.52 : PID-38304, L2A_Tables: band B02 imported, elapsed time[s]: 4.451, total: 0:00:15.028000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:07:03.815" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 0.78 : PID-38304, L2A_Tables: band B03 imported, elapsed time[s]: 4.544, total: 0:00:19.572000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:07:08.515" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 1.05 : PID-38304, L2A_Tables: band B04 imported, elapsed time[s]: 4.694, total: 0:00:24.266000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:07:11.141" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 1.20 : PID-38304, L2A_Tables: band B05 imported, elapsed time[s]: 2.635, total: 0:00:26.901000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:07:13.796" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 1.35 : PID-38304, L2A_Tables: band B06 imported, elapsed time[s]: 2.640, total: 0:00:29.541000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:07:16.325" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 1.50 : PID-38304, L2A_Tables: band B07 imported, elapsed time[s]: 2.544, total: 0:00:32.085000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:07:19.265" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 1.67 : PID-38304, L2A_Tables: band B8A imported, elapsed time[s]: 2.940, total: 0:00:35.025000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:07:20.214" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 1.72 : PID-38304, L2A_Tables: band B09 imported, elapsed time[s]: 0.950, total: 0:00:35.975000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:07:21.141" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 1.77 : PID-38304, L2A_Tables: band B10 imported, elapsed time[s]: 0.910, total: 0:00:36.885000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:07:23.724" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 1.92 : PID-38304, L2A_Tables: band B11 imported, elapsed time[s]: 2.590, total: 0:00:39.475000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:07:26.341" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 2.07 : PID-38304, L2A_Tables: band B12 imported, elapsed time[s]: 2.626, total: 0:00:42.101000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:07:26.375" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 2.07 : PID-38304, L2A_Tables: QLT_MSK, the quality check is Passed, elapsed time[s]: 0.034, total: 0:00:42.135000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:07:26.375" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 2.07 : PID-38304, L2A_Tables: no MSK_QUALIT available, skipping the handling of Quality Mask, elapsed time[s]: 0.000, total: 0:00:42.135000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:07:26.407" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 2.07 : PID-38304, L2A_Tables: AUX_CAMS* file found., elapsed time[s]: 0.016, total: 0:00:42.151000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:07:37.135" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 2.69 : PID-38304, L2A_Tables: Visibility map from file AUX_CAMSFO prepared, elapsed time[s]: 10.744, total: 0:00:52.895000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:07:37.135" level="INFO" process="38304" module="L2A_Tables" function="importBandList" line="1199"/>
+<message contentType="Text">DEM directory not specified, flat surface is used, and DEM will not be exported</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:07:37.151" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 2.69 : PID-38304, L2A_ProcessTile: start of Scene Classification, elapsed time[s]: 0.001, total: 0:00:52.896000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:07:37.565" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 2.72 : PID-38304, L2A_Tables: band B02 must be resampled, elapsed time[s]: 0.430, total: 0:00:53.326000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:07:40.414" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="174"/>
+<message contentType="Text">performing Scene Classification with resolution 20 m</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:07:40.430" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 2.88 : PID-38304, Pre process   , elapsed time[s]: 2.849, total: 0:00:56.175000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:07:40.467" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 2.88 : PID-38304, L2A_Tables: band B01 must be resampled, elapsed time[s]: 0.047, total: 0:00:56.222000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:07:46.515" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 3.23 : PID-38304, L2A_Tables: band B03 must be resampled, elapsed time[s]: 6.053, total: 0:01:02.275000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:07:49.502" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 3.40 : PID-38304, L2A_Tables: band B04 must be resampled, elapsed time[s]: 2.987, total: 0:01:05.262000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:07:53.365" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 3.62 : PID-38304, L2A_Tables: band B09 must be resampled, elapsed time[s]: 3.855, total: 0:01:09.117000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:07:56.805" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 3.82 : PID-38304, L2A_Tables: band B10 must be resampled, elapsed time[s]: 3.445, total: 0:01:12.562000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:08:01.091" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 4.06 : PID-38304, L2A_SC init   , elapsed time[s]: 4.289, total: 0:01:16.851000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:08:02.915" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 4.17 : PID-38304, L2A_CSND_1_1  , elapsed time[s]: 1.825, total: 0:01:18.676000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:08:04.740" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 4.27 : PID-38304, L2A_CSND_1_2  , elapsed time[s]: 1.825, total: 0:01:20.501000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:08:04.940" level="INFO" process="38304" module="L2A_SceneClass_evolution" function="process" line="1675"/>
+<message contentType="Text">No snow probability from climatology, detection will be ignored</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:08:07.482" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 4.43 : PID-38304, L2A_CSND_3    , elapsed time[s]: 2.741, total: 0:01:23.242000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:08:09.776" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 4.56 : PID-38304, L2A_CSND_5_1  , elapsed time[s]: 2.294, total: 0:01:25.536000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:08:13.964" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 4.80 : PID-38304, L2A_CSND_5_2  , elapsed time[s]: 4.189, total: 0:01:29.725000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:08:16.930" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 4.97 : PID-38304, L2A_CSND_6    , elapsed time[s]: 2.950, total: 0:01:32.675000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:08:18.766" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 5.08 : PID-38304, L2A_CSND_6_2  , elapsed time[s]: 1.851, total: 0:01:34.526000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:08:21.490" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 5.23 : PID-38304, L2A_CSND_7    , elapsed time[s]: 2.725, total: 0:01:37.251000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:08:23.947" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 5.37 : PID-38304, DV recovery   , elapsed time[s]: 2.457, total: 0:01:39.708000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:08:26.815" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 5.54 : PID-38304, WP recovery   , elapsed time[s]: 2.868, total: 0:01:42.576000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:08:26.832" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 5.54 : PID-38304, WP recovery with CCI Water Bodies at 150m  , elapsed time[s]: 0.000, total: 0:01:42.576000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:08:28.732" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 5.65 : PID-38304, Snow recovery , elapsed time[s]: 1.916, total: 0:01:44.492000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:08:33.963" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 5.95 : PID-38304, SnowSoilBorders, elapsed time[s]: 5.216, total: 0:01:49.708000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:08:35.447" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 6.03 : PID-38304, Soil recovery , elapsed time[s]: 1.484, total: 0:01:51.192000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:08:35.447" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 6.03 : PID-38304, Cirrus recovery with B10 , elapsed time[s]: 0.016, total: 0:01:51.208000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:08:35.466" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 6.03 : PID-38304, Urban and Bare pixel recovery with CCI Land Cover Map at 300 m , elapsed time[s]: 0.000, total: 0:01:51.208000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:08:46.141" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 6.64 : PID-38304, Bright pixels Hollstein Fmask, elapsed time[s]: 10.684, total: 0:02:01.892000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:09:45.266" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 10.03 : PID-38304, L2A_SHD       , elapsed time[s]: 59.135, total: 0:03:01.027000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:09:45.282" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 10.04 : PID-38304, WP recovery with CCI Water Bodies at 150m  , elapsed time[s]: 0.016, total: 0:03:01.043000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:09:46.868" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 10.13 : PID-38304, Topographic casted shadow Pixels post processing, elapsed time[s]: 1.585, total: 0:03:02.628000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:09:47.101" level="INFO" process="38304" module="L2A_SceneClass_evolution" function="postprocess" line="118"/>
+<message contentType="Text">Storing final Classification Mask</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:09:47.148" level="INFO" process="38304" module="L2A_SceneClass_evolution" function="postprocess" line="120"/>
+<message contentType="Text">Storing final Snow Confidence Mask</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:09:47.447" level="INFO" process="38304" module="L2A_SceneClass_evolution" function="postprocess" line="122"/>
+<message contentType="Text">Storing final Cloud Confidence Mask</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:09:47.683" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 10.17 : PID-38304, Post process  , elapsed time[s]: 0.799, total: 0:03:03.427000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:09:47.782" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 10.18 : PID-38304, L2A_ProcessTile: start of Atmospheric Correction, elapsed time[s]: 0.116, total: 0:03:03.543000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:09:47.782" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="191"/>
+<message contentType="Text">performing atmospheric correction with resolution 20 m</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:09:47.782" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">checking configuration</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:09:47.782" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">DEM is not present, flat surface assumed</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:09:49.640" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 10.28 : PID-38304, L2A_AtmCorr: end of calculation terrain maps, elapsed time[s]: 1.857, total: 0:03:05.400000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:09:49.655" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 10.29 : PID-38304, L2A_AtmCorr: start of AOT retrieval at 550nm, elapsed time[s]: 0.016, total: 0:03:05.416000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:09:58.233" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 10.78 : PID-38304, L2A_AtmCorr: end of internal classification, elapsed time[s]: 8.577, total: 0:03:13.993000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:09:58.582" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 10.80 : PID-38304, L2A_AtmCorr: end of interpolation LUTs, elapsed time[s]: 0.350, total: 0:03:14.343000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:09:58.582" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 10.80 : PID-38304, L2A_AtmCorr: end retrieving reference pixels for dark areas, elapsed time[s]: 0.000, total: 0:03:14.343000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:10:16.967" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 11.85 : PID-38304, L2A_AtmCorr: end of reading AUX_DATA or ECMWF CAMS visibility to index, elapsed time[s]: 18.384, total: 0:03:32.727000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:10:55.553" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 14.06 : PID-38304, L2A_AtmCorr: meanvis (CAMS): 27.65 km, elapsed time[s]: 38.583, total: 0:04:11.310000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:10:55.559" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 14.06 : PID-38304, L2A_AtmCorr: meanvis (after check_neg): 27.65 km, elapsed time[s]: 0.008, total: 0:04:11.318000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:10:55.842" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 14.08 : PID-38304, L2A_AtmCorr: end of check for dense bright vegetation pixels, elapsed time[s]: 0.275, total: 0:04:11.593000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:11:00.368" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 14.34 : PID-38304, L2A_AtmCorr: end of receiving atmospheric functions for all altitudes and visibilities, elapsed time[s]: 4.530, total: 0:04:16.123000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:11:00.375" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 14.34 : PID-38304, L2A_AtmCorr: end of AOT retrieval at 550nm, elapsed time[s]: 0.008, total: 0:04:16.131000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:11:00.381" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 14.34 : PID-38304, L2A_AtmCorr: start of water vapour retrieval, elapsed time[s]: 0.007, total: 0:04:16.138000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:11:00.384" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv04_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:11:00.417" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv10_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:11:00.467" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv20_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:11:00.517" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv29_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:11:00.568" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv40_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:11:00.605" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv50_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:11:01.217" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 14.39 : PID-38304, L2A_AtmCorr: end of water vapour retrieval preparation, elapsed time[s]: 0.840, total: 0:04:16.978000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:11:02.970" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv04_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:11:03.015" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv10_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:11:03.049" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv20_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:11:03.099" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv29_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:11:03.150" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv40_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:11:03.184" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv50_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:11:05.658" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv04_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:11:05.693" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv10_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:11:05.743" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv20_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:11:05.793" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv29_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:11:05.834" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv40_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:11:05.878" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv50_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:11:12.134" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv04_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:11:12.167" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv10_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:11:12.233" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv20_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:11:12.283" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv29_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:11:12.318" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv40_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:11:12.368" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv50_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:11:18.584" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv04_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:11:18.642" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv10_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:11:18.684" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv20_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:11:18.717" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv29_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:11:18.767" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv40_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:11:18.818" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv50_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:11:25.543" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv04_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:11:25.594" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv10_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:11:25.628" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv20_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:11:25.684" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv29_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:11:25.727" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv40_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:11:25.775" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv50_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:11:31.862" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv04_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:11:31.894" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv10_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:11:31.959" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv20_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:11:32.017" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv29_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:11:32.072" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv40_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:11:32.121" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv50_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:11:38.700" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv04_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:11:38.750" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv10_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:11:38.799" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv20_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:11:38.848" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv29_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:11:38.894" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv40_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:11:38.934" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv50_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:11:45.177" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv04_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:11:45.227" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv10_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:11:45.269" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv20_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:11:45.318" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv29_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:11:45.359" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv40_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:11:45.417" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv50_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:11:52.099" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv04_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:11:52.140" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv10_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:11:52.184" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv20_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:11:52.232" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv29_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:11:52.283" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv40_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:11:52.334" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv50_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:11:58.585" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv04_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:11:58.634" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv10_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:11:58.667" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv20_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:11:58.719" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv29_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:11:58.769" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv40_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:11:58.815" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv50_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:12:05.344" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv04_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:12:05.394" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv10_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:12:05.428" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv20_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:12:05.479" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv29_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:12:05.529" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv40_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:12:05.573" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv50_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:12:12.009" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv04_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:12:12.043" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv10_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:12:12.094" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv20_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:12:12.141" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv29_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:12:12.184" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv40_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:12:12.233" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv50_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:12:18.484" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv04_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:12:18.535" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv10_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:12:18.585" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv20_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:12:18.635" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv29_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:12:18.668" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv40_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:12:18.719" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv50_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:12:24.960" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv04_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:12:25.009" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv10_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:12:25.043" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv20_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:12:25.109" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv29_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:12:25.160" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv40_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:12:25.194" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv50_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:12:27.594" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv04_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:12:27.634" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv10_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:12:27.694" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv20_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:12:27.729" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv29_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:12:27.779" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv40_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:12:27.828" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv50_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:12:34.295" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv04_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:12:34.345" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv10_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:12:34.381" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv20_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:12:34.434" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv29_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:12:34.470" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv40_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:12:34.519" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv50_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:12:40.994" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv04_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:12:41.046" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv10_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:12:41.095" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv20_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:12:41.128" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv29_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:12:41.184" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv40_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:12:41.219" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv50_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:12:43.660" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv04_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:12:43.710" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv10_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:12:43.759" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv20_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:12:43.809" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv29_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:12:43.855" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv40_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:12:43.894" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv50_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:12:50.946" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv04_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:12:50.979" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv10_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:12:51.036" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv20_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:12:51.069" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv29_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:12:51.118" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv40_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:12:51.161" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv50_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:12:57.760" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 21.07 : PID-38304, L2A_AtmCorr: end of water vapour retrieval, elapsed time[s]: 116.527, total: 0:06:13.505000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:12:57.769" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 21.07 : PID-38304, L2A_AtmCorr: preparation of surface reflectance retrieval, elapsed time[s]: 0.016, total: 0:06:13.521000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:12:57.769" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv04_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:12:57.819" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv10_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:12:57.859" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv20_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:12:57.907" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv29_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:12:57.944" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv40_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:12:57.994" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv50_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:13:01.161" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 21.26 : PID-38304, L2A_AtmCorr: end of surface reflectance retrieval preparation, elapsed time[s]: 3.384, total: 0:06:16.905000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:13:01.194" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 21.26 : PID-38304, L2A_AtmCorr: start of surface reflectance retrieval, elapsed time[s]: 0.040, total: 0:06:16.945000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:15:12.321" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 28.78 : PID-38304, L2A_AtmCorr: end of surface reflectance retrieval, elapsed time[s]: 131.120, total: 0:08:28.065000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:15:12.331" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 28.78 : PID-38304, L2A_AtmCorr: start of rho retrieval step 2, elapsed time[s]: 0.016, total: 0:08:28.081000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:15:12.331" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">surface reflectance retrieval, step 2 (adjacency effect)</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:15:56.355" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 31.30 : PID-38304, L2A_AtmCorr: adjacency correction has been disabled because of high cloud coverage, elapsed time[s]: 44.030, total: 0:09:12.111000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:15:56.361" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 31.30 : PID-38304, L2A_AtmCorr: end of rho retrieval step 2, elapsed time[s]: 0.007, total: 0:09:12.118000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:15:56.430" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 31.31 : PID-38304, L2A_ProcessTile: start of post processing, elapsed time[s]: 0.063, total: 0:09:12.181000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:15:56.430" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="postprocess" line="264"/>
+<message contentType="Text">post-processing with resolution 20 m</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:15:57.447" level="INFO" process="38304" module="L2A_XmlParser" function="validate" line="118"/>
+<message contentType="Text">validating metadata file L2A_QUALITY.xml against scheme</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:15:57.447" level="INFO" process="38304" module="L2A_XmlParser" function="validate" line="124"/>
+<message contentType="Text">metadata file is valid</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:15:57.480" level="INFO" process="38304" module="L2A_XmlParser" function="validate" line="118"/>
+<message contentType="Text">validating metadata file L2A_QUALITY.xml against scheme</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:15:57.480" level="INFO" process="38304" module="L2A_XmlParser" function="validate" line="124"/>
+<message contentType="Text">metadata file is valid</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:15:57.480" level="INFO" process="38304" module="L2A_XmlParser" function="validate" line="118"/>
+<message contentType="Text">validating metadata file L2A_QUALITY.xml against scheme</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:15:57.480" level="INFO" process="38304" module="L2A_XmlParser" function="validate" line="124"/>
+<message contentType="Text">metadata file is valid</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:15:57.496" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 31.37 : PID-38304, L2A_Tables: start export for 20 m resolution, elapsed time[s]: 1.060, total: 0:09:13.241000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:16:01.846" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 31.62 : PID-38304, L2A_Tables: band B01 exported, elapsed time[s]: 4.366, total: 0:09:17.607000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:16:09.470" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 32.05 : PID-38304, L2A_Tables: band B02 exported, elapsed time[s]: 7.624, total: 0:09:25.231000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:16:16.680" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 32.47 : PID-38304, L2A_Tables: band B03 exported, elapsed time[s]: 7.204, total: 0:09:32.435000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:16:24.253" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 32.90 : PID-38304, L2A_Tables: band B04 exported, elapsed time[s]: 7.579, total: 0:09:40.014000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:16:31.371" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 33.31 : PID-38304, L2A_Tables: band B05 exported, elapsed time[s]: 7.118, total: 0:09:47.132000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:16:38.381" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 33.71 : PID-38304, L2A_Tables: band B06 exported, elapsed time[s]: 7.005, total: 0:09:54.137000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:16:45.282" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 34.11 : PID-38304, L2A_Tables: band B07 exported, elapsed time[s]: 6.905, total: 0:10:01.042000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:16:52.650" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 34.53 : PID-38304, L2A_Tables: band B8A exported, elapsed time[s]: 7.368, total: 0:10:08.410000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:16:59.200" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 34.90 : PID-38304, L2A_Tables: band B11 exported, elapsed time[s]: 6.548, total: 0:10:14.958000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:17:05.871" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 35.29 : PID-38304, L2A_Tables: band B12 exported, elapsed time[s]: 6.665, total: 0:10:21.623000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:17:07.062" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 35.35 : PID-38304, L2A_Tables: band SCL exported, elapsed time[s]: 1.200, total: 0:10:22.823000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:17:07.819" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 35.40 : PID-38304, L2A_Tables: band SNW exported, elapsed time[s]: 0.741, total: 0:10:23.564000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:17:09.703" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 35.51 : PID-38304, L2A_Tables: band CLD exported, elapsed time[s]: 1.900, total: 0:10:25.464000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:17:10.578" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 35.56 : PID-38304, L2A_Tables: band AOT exported, elapsed time[s]: 0.868, total: 0:10:26.332000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:17:11.505" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 35.61 : PID-38304, L2A_Tables: band WVP exported, elapsed time[s]: 0.933, total: 0:10:27.265000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:17:12.334" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 35.66 : PID-38304, L2A_Tables: band VIS exported, elapsed time[s]: 0.829, total: 0:10:28.094000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:17:12.334" level="INFO" process="38304" module="L2A_Tables" function="updateBandInfo" line="3949"/>
+<message contentType="Text">Unsupported band entries already removed or not found</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:17:13.721" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 35.74 : PID-38304, L2A_Tables: band PVI exported, elapsed time[s]: 1.388, total: 0:10:29.482000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:17:28.322" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 36.57 : PID-38304, L2A_Tables: band TCI exported, elapsed time[s]: 14.601, total: 0:10:44.083000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:17:28.371" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 36.58 : PID-38304, L2A_Tables: stop export, elapsed time[s]: 0.049, total: 0:10:44.132000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:17:28.388" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 36.58 : PID-38304, L2A_Tables: preparing downsampled export for 60 m resolution, elapsed time[s]: 0.017, total: 0:10:44.149000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:17:28.404" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 36.58 : PID-38304, L2A_Tables: start export for 60 m resolution, elapsed time[s]: 0.000, total: 0:10:44.149000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:17:29.854" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 36.66 : PID-38304, L2A_Tables: band B01 exported, elapsed time[s]: 1.465, total: 0:10:45.614000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:17:31.298" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 36.74 : PID-38304, L2A_Tables: band B02 exported, elapsed time[s]: 1.444, total: 0:10:47.058000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:17:32.739" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 36.83 : PID-38304, L2A_Tables: band B03 exported, elapsed time[s]: 1.425, total: 0:10:48.483000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:17:34.138" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 36.91 : PID-38304, L2A_Tables: band B04 exported, elapsed time[s]: 1.415, total: 0:10:49.898000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:17:35.539" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 36.99 : PID-38304, L2A_Tables: band B05 exported, elapsed time[s]: 1.385, total: 0:10:51.283000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:17:36.938" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 37.07 : PID-38304, L2A_Tables: band B06 exported, elapsed time[s]: 1.416, total: 0:10:52.699000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:17:38.322" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 37.15 : PID-38304, L2A_Tables: band B07 exported, elapsed time[s]: 1.384, total: 0:10:54.083000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:17:39.806" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 37.23 : PID-38304, L2A_Tables: band B8A exported, elapsed time[s]: 1.481, total: 0:10:55.564000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:17:41.173" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 37.31 : PID-38304, L2A_Tables: band B09 exported, elapsed time[s]: 1.360, total: 0:10:56.924000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:17:42.526" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 37.39 : PID-38304, L2A_Tables: band B11 exported, elapsed time[s]: 1.362, total: 0:10:58.286000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:17:43.882" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 37.46 : PID-38304, L2A_Tables: band B12 exported, elapsed time[s]: 1.357, total: 0:10:59.643000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:17:45.717" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 37.57 : PID-38304, L2A_Tables: band SCL exported, elapsed time[s]: 1.831, total: 0:11:01.474000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:17:46.233" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 37.60 : PID-38304, L2A_Tables: band SNW exported, elapsed time[s]: 0.509, total: 0:11:01.983000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:17:46.963" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 37.64 : PID-38304, L2A_Tables: band CLD exported, elapsed time[s]: 0.741, total: 0:11:02.724000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:17:47.654" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 37.68 : PID-38304, L2A_Tables: band AOT exported, elapsed time[s]: 0.675, total: 0:11:03.399000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:17:48.273" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 37.72 : PID-38304, L2A_Tables: band WVP exported, elapsed time[s]: 0.631, total: 0:11:04.030000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:17:48.273" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 37.72 : PID-38304, L2A_Tables: band TCI must be resampled, elapsed time[s]: 0.003, total: 0:11:04.033000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:17:48.289" level="INFO" process="38304" module="L2A_Tables" function="updateBandInfo" line="3949"/>
+<message contentType="Text">Unsupported band entries already removed or not found</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:17:49.989" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 37.81 : PID-38304, L2A_Tables: band TCI exported, elapsed time[s]: 1.716, total: 0:11:05.749000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:17:50.023" level="INFO" process="38304" module="L2A_XmlParser" function="validate" line="118"/>
+<message contentType="Text">validating metadata file MTD_MSIL2A.xml against scheme</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:17:50.073" level=" INFO" process="38304" module="L2A_XmlParser" function="validate" line="127"/>
+<message contentType="Text">Syntax error in metadata, see report file for details.</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:17:50.073" level="ERROR" process="38304" module="L2A_XmlParser" function="validate" line="128"/>
+<message contentType="Text">Schema file: S2-PDGS-TAS-DI-PSD-V14.9_Schema\S2_User_Product_Level-2A_Metadata.xsd</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:17:50.073" level="ERROR" process="38304" module="L2A_XmlParser" function="validate" line="129"/>
+<message contentType="Text">Details: Element '{https://psd-15.sentinel2.eo.esa.int/PSD/User_Product_Level-2A.xsd}Level-2A_User_Product': No matching global declaration available for the validation root.</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:17:50.115" level="INFO" process="38304" module="L2A_XmlParser" function="validate" line="118"/>
+<message contentType="Text">validating metadata file MTD_TL.xml against scheme</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:17:50.173" level="INFO" process="38304" module="L2A_XmlParser" function="validate" line="124"/>
+<message contentType="Text">metadata file is valid</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:17:51.138" level="INFO" process="38304" module="L2A_XmlParser" function="validate" line="118"/>
+<message contentType="Text">validating metadata file manifest.safe against scheme</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:17:51.145" level="INFO" process="38304" module="L2A_XmlParser" function="validate" line="124"/>
+<message contentType="Text">metadata file is valid</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:17:51.145" level="INFO" process="38304" module="L2A_SceneClass_evolution" function="__del__" line="299"/>
+<message contentType="Text">Module L2A_SceneClass deleted</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:17:51.548" level="INFO" process="38304" module="L2A_XmlParser" function="validate" line="118"/>
+<message contentType="Text">validating metadata file MTD_DS.xml against scheme</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:17:52.322" level="INFO" process="38304" module="L2A_XmlParser" function="validate" line="124"/>
+<message contentType="Text">metadata file is valid</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:17:52.332" level="INFO" process="38304" module="L2A_Config" function="readPreferences" line="4482"/>
+<message contentType="Text">input product origins from: Sentinel-2B</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:17:52.332" level="INFO" process="38304" module="L2A_XmlParser" function="validate" line="118"/>
+<message contentType="Text">validating metadata file L2A_CAL_SC_GIPP.xml against scheme</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:17:52.332" level="INFO" process="38304" module="L2A_XmlParser" function="validate" line="124"/>
+<message contentType="Text">metadata file is valid</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:17:52.332" level="INFO" process="38304" module="L2A_XmlParser" function="validate" line="118"/>
+<message contentType="Text">validating metadata file L2A_CAL_AC_GIPP.xml against scheme</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:17:52.348" level="INFO" process="38304" module="L2A_XmlParser" function="validate" line="124"/>
+<message contentType="Text">metadata file is valid</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:17:52.348" level="INFO" process="38304" module="L2A_XmlParser" function="validate" line="118"/>
+<message contentType="Text">validating metadata file L2A_GIPP.xml against scheme</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:17:52.348" level="INFO" process="38304" module="L2A_XmlParser" function="validate" line="124"/>
+<message contentType="Text">metadata file is valid</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:17:53.088" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 37.99 : PID-38304, L2A_ProcessTile: processing with resolution 10 m, elapsed time[s]: 3.100, total: 0:11:08.849000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:17:53.088" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 37.99 : PID-38304, L2A_ProcessTile: start of pre processing, elapsed time[s]: 0.000, total: 0:11:08.849000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:17:53.088" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="preprocess" line="225"/>
+<message contentType="Text">pre-processing with resolution 10 m</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:17:53.088" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="preprocess" line="230"/>
+<message contentType="Text">checking configuration</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:17:53.088" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="preprocess" line="230"/>
+<message contentType="Text">water vapour retrieval is disabled for 10m resolution</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:17:53.088" level="INFO" process="38304" module="L2A_XmlParser" function="validate" line="118"/>
+<message contentType="Text">validating metadata file MTD_TL.xml against scheme</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:17:53.140" level="INFO" process="38304" module="L2A_XmlParser" function="validate" line="124"/>
+<message contentType="Text">metadata file is valid</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:17:53.154" level="INFO" process="38304" module="L2A_Config" function="createAtmDataFilename" line="5472"/>
+<message contentType="Text">Ozone_Content is set to h with 14.412492 least difference to input value</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:17:53.154" level="INFO" process="38304" module="L2A_Config" function="createAtmDataFilename" line="5475"/>
+<message contentType="Text">generated file name for look up tables is: h99000_wv20_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:17:53.154" level="INFO" process="38304" module="L2A_Config" function="createAtmDataFilename" line="5481"/>
+<message contentType="Text">look up table for S2B found and used</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:17:53.154" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 38.00 : PID-38304, L2A_Tables: remove unused bands for 10m resolution, elapsed time[s]: 0.066, total: 0:11:08.915000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:17:53.240" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 38.00 : PID-38304, L2A_Tables: start import, elapsed time[s]: 0.085, total: 0:11:09</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:17:53.240" level="INFO" process="38304" module="L2A_Tables" function="importBandImg" line="3133"/>
+<message contentType="Text">L2A_Tables: band B02 already present</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:17:53.255" level="INFO" process="38304" module="L2A_Tables" function="importBandImg" line="3133"/>
+<message contentType="Text">L2A_Tables: band B03 already present</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:17:53.255" level="INFO" process="38304" module="L2A_Tables" function="importBandImg" line="3133"/>
+<message contentType="Text">L2A_Tables: band B04 already present</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:17:57.552" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 38.25 : PID-38304, L2A_Tables: band B08 imported, elapsed time[s]: 4.313, total: 0:11:13.313000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:17:57.622" level="INFO" process="38304" module="L2A_Tables" function="importBandList" line="1151"/>
+<message contentType="Text">perform up sampling of SCL, AOT and VIS from 20m channels to 10m</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:17:57.650" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 38.25 : PID-38304, L2A_Tables: band SCL needs to be resampled, elapsed time[s]: 0.094, total: 0:11:13.407000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:18:04.072" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 38.62 : PID-38304, L2A_Tables: band SCL imported, elapsed time[s]: 6.426, total: 0:11:19.833000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:18:04.124" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 38.62 : PID-38304, L2A_Tables: band AOT needs to be resampled, elapsed time[s]: 0.047, total: 0:11:19.880000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:18:10.523" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 38.99 : PID-38304, L2A_Tables: band AOT imported, elapsed time[s]: 6.403, total: 0:11:26.283000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:18:10.572" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 38.99 : PID-38304, L2A_Tables: band WVP needs to be resampled, elapsed time[s]: 0.050, total: 0:11:26.333000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:18:16.782" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 39.35 : PID-38304, L2A_Tables: band WVP imported, elapsed time[s]: 6.210, total: 0:11:32.543000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:18:16.832" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 39.35 : PID-38304, L2A_Tables: band VIS needs to be resampled, elapsed time[s]: 0.040, total: 0:11:32.583000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:18:23.055" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 39.71 : PID-38304, L2A_Tables: band VIS imported, elapsed time[s]: 6.232, total: 0:11:38.815000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:18:23.362" level="INFO" process="38304" module="L2A_Tables" function="importBandList" line="1181"/>
+<message contentType="Text">renaming hd5 result database (size: 964976627)</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:18:23.372" level="INFO" process="38304" module="L2A_Tables" function="importBandList" line="1199"/>
+<message contentType="Text">DEM directory not specified, flat surface is used, and DEM will not be exported</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:18:23.944" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 39.76 : PID-38304, L2A_ProcessTile: start of Atmospheric Correction, elapsed time[s]: 0.890, total: 0:11:39.705000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:18:23.944" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="191"/>
+<message contentType="Text">performing atmospheric correction with resolution 10 m</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:18:23.944" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">checking configuration</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:18:23.944" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">water vapour retrieval is disabled for 10m resolution</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:18:23.944" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">DEM is not present, flat surface assumed</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:18:31.640" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 40.20 : PID-38304, L2A_AtmCorr: end of calculation terrain maps, elapsed time[s]: 7.695, total: 0:11:47.400000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:18:31.655" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 40.20 : PID-38304, L2A_AtmCorr: start of resampling visibility for 10 m resolution, elapsed time[s]: 0.016, total: 0:11:47.416000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:18:32.822" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 40.27 : PID-38304, L2A_AtmCorr: end of resampling visibility for 10 m resolution, elapsed time[s]: 1.151, total: 0:11:48.567000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:18:36.713" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 40.49 : PID-38304, L2A_AtmCorr: end of AOT retrieval at 550nm, elapsed time[s]: 3.891, total: 0:11:52.458000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:18:36.713" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 40.49 : PID-38304, L2A_AtmCorr: preparation of surface reflectance retrieval, elapsed time[s]: 0.015, total: 0:11:52.473000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:18:36.723" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv04_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:18:36.740" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv10_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:18:36.770" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv20_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:18:36.789" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv29_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:18:36.805" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv40_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:18:36.822" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">generating grid for altitude with aerosol file name: h99000_wv50_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:18:41.167" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 40.75 : PID-38304, L2A_AtmCorr: end of surface reflectance retrieval preparation, elapsed time[s]: 4.438, total: 0:11:56.911000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:18:41.191" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 40.75 : PID-38304, L2A_AtmCorr: start of surface reflectance retrieval, elapsed time[s]: 0.036, total: 0:11:56.947000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:21:33.385" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 50.62 : PID-38304, L2A_AtmCorr: end of surface reflectance retrieval, elapsed time[s]: 172.199, total: 0:14:49.146000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:21:33.426" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 50.62 : PID-38304, L2A_AtmCorr: start of rho retrieval step 2, elapsed time[s]: 0.031, total: 0:14:49.177000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:21:33.467" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="_process" line="192"/>
+<message contentType="Text">surface reflectance retrieval, step 2 (adjacency effect)</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:23:13.782" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 56.37 : PID-38304, L2A_AtmCorr: adjacency correction has been disabled because of high cloud coverage, elapsed time[s]: 100.361, total: 0:16:29.538000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:23:13.792" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 56.37 : PID-38304, L2A_AtmCorr: end of rho retrieval step 2, elapsed time[s]: 0.009, total: 0:16:29.547000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:23:13.828" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 56.37 : PID-38304, L2A_ProcessTile: start of post processing, elapsed time[s]: 0.039, total: 0:16:29.586000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:23:13.832" level="INFO" process="38304" module="L2A_ProcessTileToolbox" function="postprocess" line="264"/>
+<message contentType="Text">post-processing with resolution 10 m</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:23:13.835" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 56.37 : PID-38304, L2A_Tables: start export for 10 m resolution, elapsed time[s]: 0.006, total: 0:16:29.592000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:23:38.292" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 57.78 : PID-38304, L2A_Tables: band B02 exported, elapsed time[s]: 24.461, total: 0:16:54.053000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:24:02.326" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 59.15 : PID-38304, L2A_Tables: band B03 exported, elapsed time[s]: 24.034, total: 0:17:18.087000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:24:26.368" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 60.53 : PID-38304, L2A_Tables: band B04 exported, elapsed time[s]: 24.026, total: 0:17:42.113000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:24:50.730" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 61.93 : PID-38304, L2A_Tables: band B08 exported, elapsed time[s]: 24.377, total: 0:18:06.490000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:24:54.543" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 62.15 : PID-38304, L2A_Tables: band AOT exported, elapsed time[s]: 3.814, total: 0:18:10.304000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:24:58.660" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 62.38 : PID-38304, L2A_Tables: band WVP exported, elapsed time[s]: 4.100, total: 0:18:14.404000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:24:58.660" level="INFO" process="38304" module="L2A_Tables" function="updateBandInfo" line="3949"/>
+<message contentType="Text">Unsupported band entries already removed or not found</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:25:50.295" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 65.34 : PID-38304, L2A_Tables: band TCI exported, elapsed time[s]: 51.651, total: 0:19:06.055000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:25:50.476" level="INFO" process="38304" module="L2A_Tables" function="exportBandList" line="3890"/>
+<message contentType="Text">removing hd5 result database (size: 2662616715)</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:25:51.028" level="INFO" process="38304" module="L2A_Tables" function="exportBandList" line="3892"/>
+<message contentType="Text">removing hd5 image database (size: 1287243571)</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:25:51.279" level=" INFO" process="38304" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 65.40 : PID-38304, L2A_Tables: stop export, elapsed time[s]: 0.984, total: 0:19:07.039000</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:25:51.328" level="INFO" process="38304" module="L2A_XmlParser" function="validate" line="118"/>
+<message contentType="Text">validating metadata file MTD_MSIL2A.xml against scheme</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:25:51.369" level=" INFO" process="38304" module="L2A_XmlParser" function="validate" line="127"/>
+<message contentType="Text">Syntax error in metadata, see report file for details.</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:25:51.378" level="ERROR" process="38304" module="L2A_XmlParser" function="validate" line="128"/>
+<message contentType="Text">Schema file: S2-PDGS-TAS-DI-PSD-V14.9_Schema\S2_User_Product_Level-2A_Metadata.xsd</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:25:51.378" level="ERROR" process="38304" module="L2A_XmlParser" function="validate" line="129"/>
+<message contentType="Text">Details: Element '{https://psd-15.sentinel2.eo.esa.int/PSD/User_Product_Level-2A.xsd}Level-2A_User_Product': No matching global declaration available for the validation root.</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:25:51.407" level="INFO" process="38304" module="L2A_XmlParser" function="validate" line="118"/>
+<message contentType="Text">validating metadata file MTD_TL.xml against scheme</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:25:51.470" level="INFO" process="38304" module="L2A_XmlParser" function="validate" line="124"/>
+<message contentType="Text">metadata file is valid</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:25:53.394" level="INFO" process="38304" module="L2A_XmlParser" function="validate" line="118"/>
+<message contentType="Text">validating metadata file manifest.safe against scheme</message>
+</check>
+<check>
+<inspection execution="2026-05-22T18:25:53.394" level="INFO" process="38304" module="L2A_XmlParser" function="validate" line="124"/>
+<message contentType="Text">metadata file is valid</message>
+</check>
+</Sen2Cor_Level-2A_Report_File>

@@ -1,49 +1,112 @@
-from __future__ import annotations
-
-import json
 import os
-from pathlib import Path
-from typing import Any
+import json
+import logging
 
+class PipelineConfig:
+    def __init__(self, json_path, env_path=None):
+        self.json_path = json_path
+        self.env_path = env_path or os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(json_path))), ".env")
+        self.params = {}
+        self.env_vars = {}
+        
+        self._load_json()
+        self._load_env()
+        
+    def _load_json(self):
+        """Carga los parámetros del archivo JSON."""
+        try:
+            with open(self.json_path, 'r', encoding='utf-8') as f:
+                self.params = json.load(f)
+        except Exception as e:
+            raise RuntimeError(f"Error al abrir o decodificar {self.json_path}: {e}")
+            
+    def _load_env(self):
+        """Carga las credenciales del archivo .env sin dependencias externas."""
+        if not os.path.isfile(self.env_path):
+            logging.warning(f"No se encontró archivo de variables de entorno en: {self.env_path}. Se usarán variables del sistema.")
+            return
+            
+        try:
+            with open(self.env_path, 'r', encoding='utf-8') as f:
+                for line in f:
+                    line = line.strip()
+                    if not line or line.startswith('#'):
+                        continue
+                    if '=' in line:
+                        key, val = line.split('=', 1)
+                        self.env_vars[key.strip()] = val.strip()
+                        os.environ[key.strip()] = val.strip()
+        except Exception as e:
+            logging.error(f"Error al leer el archivo .env: {e}")
 
-def load_dotenv(path: str | Path | None = None) -> dict[str, str]:
-    """Load .env file into environment variables. Returns dict of loaded vars."""
-    path = Path(path or ".env")
-    if not path.exists():
-        return {}
-    loaded: dict[str, str] = {}
-    with open(path) as f:
-        for line in f:
-            line = line.strip()
-            if not line or line.startswith("#") or "=" not in line:
-                continue
-            key, _, val = line.partition("=")
-            key, val = key.strip(), val.strip().strip("\"'")
-            os.environ.setdefault(key, val)
-            loaded[key] = val
-    return loaded
+    @property
+    def api_download_url(self):
+        return self.params.get("api", {}).get("downloadURL")
 
+    @property
+    def api_auth_url(self):
+        return self.params.get("api", {}).get("authentificationURL")
 
-def load_pipeline(path: str | Path) -> dict[str, Any]:
-    """Load pipeline.json configuration."""
-    path = Path(path)
-    if not path.exists():
-        raise FileNotFoundError(f"Pipeline config not found: {path}")
-    with open(path) as f:
-        return json.load(f)
+    @property
+    def date_range_start(self):
+        return self.params.get("dateRange", {}).get("start")
 
+    @property
+    def date_range_end(self):
+        return self.params.get("dateRange", {}).get("end")
 
-def get_credentials() -> dict[str, str]:
-    """Get credentials from environment variables."""
-    return {
-        "username": os.environ.get("CDSE_USERNAME", ""),
-        "password": os.environ.get("CDSE_PASSWORD", ""),
-    }
+    @property
+    def orbits(self):
+        return self.params.get("orbits", [])
 
+    @property
+    def working_folder(self):
+        return self.params.get("workspace", {}).get("workingFolder")
 
-def load_config(pipeline_path: str | Path, dotenv_path: str | Path | None = None) -> dict[str, Any]:
-    """Load pipeline.json + .env and return merged config."""
-    load_dotenv(dotenv_path or Path(pipeline_path).parent / ".env")
-    config = load_pipeline(pipeline_path)
-    config["_credentials"] = get_credentials()
-    return config
+    @property
+    def quicklook_dir(self):
+        return self.params.get("workspace", {}).get("quicklookDir")
+
+    @property
+    def sen2cor_bin(self):
+        return self.params.get("workspace", {}).get("sen2cor", {}).get("bin")
+
+    @property
+    def sen2cor_gipp_path(self):
+        return self.params.get("workspace", {}).get("sen2cor", {}).get("gippPath")
+
+    @property
+    def poly_search(self):
+        return self.params.get("area", {}).get("polySearch")
+
+    @property
+    def granules_per_orbit(self):
+        return self.params.get("area", {}).get("granulesPerOrbit", {})
+
+    @property
+    def limits_utm(self):
+        return self.params.get("area", {}).get("limitsUTM", {})
+
+    @property
+    def per_orbit_zone_utm(self):
+        return self.params.get("area", {}).get("perOrbitZoneUTM", {})
+
+    @property
+    def check_two_datastrips(self):
+        return self.params.get("pipeline", {}).get("checkTwoDatastrips") == "YES"
+
+    @property
+    def allowed_inner_zeros_l2a(self):
+        return self.params.get("pipeline", {}).get("AllowedInnerzerosproductL2A") == "YES"
+
+    @property
+    def product_l1c_generation(self):
+        return self.params.get("pipeline", {}).get("productL1Cgeneration") == "YES"
+
+    @property
+    def only_last_baseline(self):
+        return self.params.get("pipeline", {}).get("onlyLastBaselineForGranule") == "YES"
+
+    def get_credential(self, name):
+        """Retorna credenciales cargadas de .env o del sistema."""
+        return os.getenv(name, self.env_vars.get(name))

@@ -1,74 +1,46 @@
-# S2-PROCESS Pipeline
+# S2-PROCESS Pipeline (SOFT_new)
+
+> [!NOTE]
+> Este documento es un mapa mental técnico (AI rules) para desarrollo interno. Para el Manual de Usuario, flujos de salida y comandos de ejecución, consultar [000_documentation/SOFT_new.md](file:///f:/Disc_F/Orto_S2_CAT/antonio/open_code_project/000_documentation/SOFT_new.md).
 
 ## Project Overview
-Pipeline de procesamiento Sentinel-2 que descarga imágenes L1C, ejecuta Sen2Cor con parámetros custom (GIPP XMLs de SOFT) y genera productos L2A con corrección atmosférica a medida.
+Pipeline de procesamiento Sentinel-2 modernizado para entornos Windows nativos. Descarga imágenes L1C de Copernicus, ejecuta el motor de corrección atmosférica Sen2Cor (local en Windows), y genera productos L2A y L1C calibrados con parámetros customizados.
 
-## Project Structure
-- `SOFT_new/` — Pipeline activo
-  - `src/s2_process/` — Código fuente
-    - `main.py` — Orquestador, loop state-based
-    - `config.py` — Carga pipeline.json + .env
-    - `download/` — Clientes de descarga
-      - `dataspace_client.py` — API OData de Copernicus DataSpace
-      - `s3_downloader.py` — Descarga de bandas individuales via S3
-      - `granule_downloader.py` — Descarga de .SAFE completo via OData (curl)
-    - `processing/` — Procesamiento
-      - `cog_builder.py` — COG 4-bandas L1C (v5: post-fix B1↔B3)
-      - `l1c_mosaic.py` — Mosaico L1C (referencia)
-      - `l2a_10b_mosaic.py` — Mosaico 10-bandas L2A (BOA offset/gain + VRT + COG)
-      - `scl_extractor.py` — Extractor SCL + mosaico (reproj 20m→10m + COG)
-      - `ndvi_calculator.py` — NDVI listo
-      - `quicklook_generator.py` — QuickLook listo
-      - `mask_generator.py` — Máscaras
-    - `utils/` — Utilidades
-      - `state_tracker.py` — State machine con steps: downloaded, l1c_processed, l2a_generated, l2a_processed, quicklook, l2a_demcat_generated, l2a_demcat_processed
-      - `gdal_helpers.py` — Funciones GDAL helper
-      - `offset_gain.py` — Lectura offset/gain de MTD_DS.xml
-  - `Dockerfile.sen2cor` — Imagen custom con Sen2Cor + GDAL + Python 3
-  - `Dockerfile.sen2cor.wine` — Ubuntu 22.04 + Sen2Cor 2.12.03 via Wine 11.0 + GDAL 3.4.1
-  - `docker-compose.yml` — Servicios `s2` y `s2-wine`
-  - `configs/` — Configuración
-    - `pipeline.json` — Orbits R051, R008, fechas, área, polígono
-    - `gipp/` — GIPP XMLs de SOFT (NO-DEM, DEM-CAT, DEM-SRTM)
-  - `requirements.txt` — numpy<2, opencv, requests, boto3, botocore
+## Technical Architecture & Code Structure
+- `SOFT_new/` — Directorio raíz del Pipeline Activo
+  - `src/s2_process/` — Código fuente Python
+    - `main.py` — Orquestador principal del flujo
+    - `config.py` — Carga e inyección de `pipeline.json` + variables `.env`
+    - `download/` — Módulos de descarga de la ESA
+      - `dataspace_client.py` — API OData Copernicus DataSpace
+      - `s3_downloader.py` — Descarga selectiva de bandas individuales vía AWS S3
+      - `granule_downloader.py` — Descarga del gránulo .SAFE completo
+    - `processing/` — Módulos de cálculo y GDAL
+      - `cog_builder.py` — Mosaico COG 4-bandas L1C calibrado
+      - `l2a_10b_mosaic.py` — Mosaico COG 10-bandas L2A (BOA)
+      - `scl_extractor.py` — Extracción y remuestreo 20m→10m de máscara SCL
+      - `ndvi_calculator.py` — Calculadora de NDVI
+      - `quicklook_generator.py` — Generador de QuickLooks RGB y RGBI
+      - `mask_generator.py` — Generador de máscaras vectoriales (Cutline)
+    - `utils/` — Utilidades core
+      - `state_tracker.py` — Tracking de estado del pipeline (downloaded, l1c_processed, l2a_generated...)
+      - `gdal_helpers.py` — Wrappers nativos de GDAL y VRTs
+      - `offset_gain.py` — Lector de metadatos radiométricos (MTD_DS.xml)
+      - `sen2cor_patch.py` — Parche inyector de Baseline 05.11 para Sen2Cor
+  - `environment.yml` — Entorno de dependencias Conda (GDAL, Numpy, Rasterio...)
+  - `pipeline.json` — Configuración de órbitas, fechas y bounding boxes.
+  - `.env` — Credenciales de CDSE y S3.
+  - `Sen2Cor-02.12.03-win64/` — Motor compilado nativo de Sen2Cor para Windows.
 
-## Pipeline Flow
-1. `downloaded` — Buscar productos en OData + guardar products.json
-2. `l1c_processed` — Descargar bandas L1C de S3 → offset/gain → reproject → VRT → COG 4B → post-fix B1↔B3
-3. `l2a_generated` — Descargar .SAFE completo → Sen2Cor 2.12.03 via Wine con GIPP NO-DEM
-4. `l2a_processed` — Mosaico 10-bandas L2A (10B) + SCL vía VRT sin `-separate`
-5. `quicklook` — [PENDIENTE] NDVI + QuickLook
-6. `l2a_demcat_generated` — [PENDIENTE] Sen2Cor con GIPP DEM-CAT
-7. `l2a_demcat_processed` — [PENDIENTE] Mosaico 10B + SCL DEM-CAT
+## Entorno Local (Windows NATIVO)
+- **Eliminación de dependencias pesadas**: No se requiere Docker, Wine, ni Linux Subsystems.
+- **Python Environment**: Administrado con Conda/Miniconda a través del `environment.yml` (e.g., entorno `sentinel2`). Incluye dependencias críticas como `libgdal-jp2openjpeg` para acelerar el procesamiento de JP2000.
+- **Sen2Cor**: Se usa la build oficial para Windows nativa (`L2A_Process.bat`).
 
-## Key Configs
-- Pipeline: `SOFT_new/configs/pipeline.json`
-- GIPP NO-DEM: `SOFT_new/configs/gipp/L2A_GIPP_NO_DEM.xml`
-- GIPP DEM-CAT: `SOFT_new/configs/gipp/L2A_GIPP_DEM_CAT.xml`
-- GIPP DEM-SRTM: `SOFT_new/configs/gipp/L2A_GIPP_DEM_SRTM.xml`
-- .env: AWS_S3_ENDPOINT, AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, CDSE_USERNAME, CDSE_PASSWORD
+## Sen2Cor Windows Details
+- **Motor Local**: Carpeta embebida junto al código fuente: `Sen2Cor-02.12.03-win64/L2A_Process.bat`.
+- **Compatibilidad Baseline 05.11**: Un sistema de parcheo automático (`sen2cor_patch.py`) reescribe dinámicamente el schema XSD problemático de la nueva Baseline ESA (`psd-14` y `psd-15`) para evitar bloqueos del binario de Windows (`Syntax error in metadata`).
+- **GIPP Custom**: Configuración de procesado inyectada vía argumento `--GIP_L2A configs\gipp\L2A_GIPP_*.xml`
 
-## Docker
-- Imagen `s2-process-l2a`: basada en kappazeta/sen2cor:v2.11.00 (solo Sen2Cor 2.11, sin PSD-15)
-- Imagen `s2-process-l2a-wine`: Ubuntu 22.04 + Sen2Cor 2.12.03 via Wine 11.0 + GDAL 3.4.1
-  - Build: `docker compose build s2-wine` (desde `SOFT_new/Dockerfile.sen2cor.wine`)
-  - Run: `docker compose up s2-wine`
-- Wrapper scripts instalados en `/usr/local/bin/L2A_Process_{VARIANT}.sh`
-- Runtime Wine prefix creado en `/tmp/wine_prefix` (no baked en imagen)
-
-## Output Naming
-- `S2X_L1C_{orbit}_{compact}.btf` — L1C 4-bandas (TOA)
-- `S2X_L2A_{orbit}_{compact}.btf` — L2A 10-bandas (NO-DEM)
-- `S2X_L2A_{orbit}_{compact}_DEMCAT.btf` — L2A 10-bandas (DEM-CAT)
-- `S2X_SCL_{orbit}_{compact}.tif` — Scene Classification Layer
-
-## Known Issues
-- GDAL Bug en `BuildVRT(separate=True)` causa band swap B1↔B3 en COG 4B. Workaround: post-fix swap con gdal_translate -b 3,2,1,4 (v5)
-- Sen2Cor 2.11.00 necesita Python 2.7 (bundled en /opt/sen2cor), no interfiere con Python 3 del pipeline
-- `build_vrt_separate` (con `-separate`) solo preserva 1ª banda para inputs multi-banda. Workaround: `build_vrt_mosaic` sin `-separate` para mosaicar TIFFs multi-banda
-
-## Sen2Cor Details
-- Binario: `/usr/local/bin/L2A_Process` (wrapper que sourcea `/opt/sen2cor/L2A_Bashrc`)
-- Parámetros: `--GIP_L2A /workspace/configs/gipp/L2A_GIPP_*.xml`
-- Input: .SAFE L1C completo (estructura de directorios standard)
-- Output: .SAFE L2A con bandas en R10m/, R20m/, R60m/
+## Technical Known Issues
+- GDAL no preserva todas las bandas cuando se usa `-separate` con TIFFs que ya son multi-banda. Workaround actual: usar el flag por defecto de GDAL sin separar a la hora de hacer el mosaico general en `l2a_10b_mosaic.py`.
