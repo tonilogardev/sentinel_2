@@ -22,9 +22,13 @@ def build_l2a_scl_mosaic(segment_dir, nom_escena, limits_gdal, utm_zone_destinat
     variant_name = "DEMCAT" if is_demcat else "L2A"
     logging.info(f"Iniciando extracción y mosaico de capa SCL {variant_name} para escena: {nom_escena}")
     
-    granule_list = fnmatch.filter(os.listdir(segment_dir), '*L2A*.SAFE')
+    if is_demcat:
+        granule_list = fnmatch.filter(os.listdir(segment_dir), '*L2A*_DEMCAT.SAFE')
+    else:
+        granule_list = [d for d in fnmatch.filter(os.listdir(segment_dir), '*L2A*.SAFE') if not d.endswith('_DEMCAT.SAFE')]
+
     if not granule_list:
-        raise RuntimeError(f"No se encontraron gránulos L2A .SAFE en {segment_dir}")
+        raise RuntimeError(f"No se encontraron gránulos L2A .SAFE para variant {'DEMCAT' if is_demcat else 'NO-DEM'} en {segment_dir}")
         
     temp_granule_tiffs = []
     
