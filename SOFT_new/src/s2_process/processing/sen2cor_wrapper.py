@@ -192,14 +192,29 @@ def run_sen2cor(sen2cor_bin, granule_safe_path, gipp_path=None, resolution=10, v
         
         l2a_pattern = l1c_name.replace("MSIL1C", "MSIL2A")
         
-        # Buscar gránulos L2A en el segmento
-        l2a_candidates = fnmatch.filter(os.listdir(segment_dir), l2a_pattern)
-        if l2a_candidates:
-            l2a_safe_path = os.path.join(segment_dir, l2a_candidates[0])
-            logging.info(f"Gránulo L2A generado localizado en: {l2a_safe_path}")
+        # Buscar gránulos L2A en el segmento que no hayan sido renombrados a DEMCAT o NODEM aún
+        l2a_pure_candidates = [d for d in fnmatch.filter(os.listdir(segment_dir), l2a_pattern) 
+                               if not d.endswith('_DEMCAT.SAFE') and not d.endswith('_NODEM.SAFE')]
+        
+        if l2a_pure_candidates:
+            l2a_safe_path = os.path.join(segment_dir, l2a_pure_candidates[0])
+            logging.info(f"Gránulo L2A original generado localizado en: {l2a_safe_path}")
             apply_l2a_xml_patch(l2a_safe_path)
+            
+            # 6. RENOMBRADO AUTOMÁTICO (El Blindaje)
+            # Para evitar que Sen2Cor machaque el resultado de la etapa anterior al correr dos veces
+            if variant == "DEMCAT":
+                new_l2a_name = l2a_pure_candidates[0].replace(".SAFE", "_DEMCAT.SAFE")
+                new_l2a_safe_path = os.path.join(segment_dir, new_l2a_name)
+                logging.info(f"Renombrando a variante topográfica para aislarlo: {new_l2a_name}")
+                os.rename(l2a_safe_path, new_l2a_safe_path)
+            elif variant == "NO-DEM":
+                new_l2a_name = l2a_pure_candidates[0].replace(".SAFE", "_NODEM.SAFE")
+                new_l2a_safe_path = os.path.join(segment_dir, new_l2a_name)
+                logging.info(f"Renombrando a variante plana para aislarlo: {new_l2a_name}")
+                os.rename(l2a_safe_path, new_l2a_safe_path)
         else:
-            logging.warning("No se pudo localizar el gránulo L2A generado en disco para aplicarle el parche L2A.")
+            logging.warning("No se pudo localizar un gránulo L2A recién generado en disco para aplicar parche/renombrado.")
             
         return True
     except Exception as e:
