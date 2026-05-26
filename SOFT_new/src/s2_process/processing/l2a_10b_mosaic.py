@@ -32,9 +32,13 @@ def build_l2a_10band_mosaic(segment_dir, nom_escena, limits_gdal, utm_zone_desti
     # No, Sen2Cor genera directorios .SAFE estándar. Pero el orquestador principal
     # probablemente los organiza en carpetas temporales o el pipeline corre Sen2Cor y produce carpetas.
     # Buscaremos carpetas .SAFE
-    granule_list = fnmatch.filter(os.listdir(segment_dir), '*L2A*.SAFE')
+    if is_demcat:
+        granule_list = fnmatch.filter(os.listdir(segment_dir), '*L2A*_DEMCAT.SAFE')
+    else:
+        granule_list = [d for d in fnmatch.filter(os.listdir(segment_dir), '*L2A*.SAFE') if not d.endswith('_DEMCAT.SAFE')]
+        
     if not granule_list:
-        raise RuntimeError(f"No se encontraron gránulos L2A .SAFE en {segment_dir}")
+        raise RuntimeError(f"No se encontraron gránulos L2A .SAFE válidos para la variante {variant_name} en {segment_dir}")
         
     temp_granule_tiffs = []
     

@@ -80,7 +80,7 @@ class PipelineConfig:
         return self._resolve_path(self.params.get("workspace", {}).get("sen2cor", {}).get("bin"))
 
     @property
-    def sen2cor_gipp_path(self):
+    def l2a_gipp_demcat(self):
         return self._resolve_path(self.params.get("workspace", {}).get("sen2cor", {}).get("gippPath"))
 
     @property
