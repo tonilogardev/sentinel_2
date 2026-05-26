@@ -15,6 +15,9 @@ import logging
 import argparse
 from datetime import datetime, timedelta
 
+# Asegurar que el directorio 'src' esté en el PYTHONPATH para evitar ModuleNotFoundError
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
 from s2_process.config import PipelineConfig
 from s2_process.utils.logger import setup_logger
 from s2_process.download.dataspace_client import CopernicusDataspaceClient
@@ -56,6 +59,24 @@ def clean_safe_directories(directory, prefix=""):
     safe_dirs = glob.glob(os.path.join(directory, search_pattern))
     for s_dir in safe_dirs:
         logging.info(f"Limpiando directorio temporal .SAFE: {s_dir}")
+        shutil.rmtree(s_dir, ignore_errors=True)
+
+def compress_safe_to_zip(directory, prefix="", suffix=""):
+    """Busca carpetas .SAFE, las empaqueta en .zip y borra la carpeta original para replicar el output legacy."""
+    search_pattern = f"*{prefix}*.SAFE" if prefix else "*.SAFE"
+    safe_dirs = glob.glob(os.path.join(directory, search_pattern))
+    for s_dir in safe_dirs:
+        # Extraer el nombre base sin la extensión .SAFE
+        base_name = os.path.basename(s_dir)
+        if base_name.endswith(".SAFE"):
+            base_name = base_name[:-5]
+        
+        zip_filename = f"{base_name}{suffix}"
+        zip_path = os.path.join(directory, zip_filename)
+        
+        logging.info(f"Empaquetando resultado a: {zip_path}.zip ...")
+        shutil.make_archive(zip_path, 'zip', s_dir)
+        logging.info(f"Borrando original: {s_dir}")
         shutil.rmtree(s_dir, ignore_errors=True)
 
 def process_segment(date_str, orbit, config, client, ui=None):
@@ -108,7 +129,8 @@ def process_segment(date_str, orbit, config, client, ui=None):
     for p in products:
         name = p.get('Name', '')
         zip_name = name.replace(".SAFE", ".zip") if name.endswith(".SAFE") else f"{name}.zip"
-        dest_zip_path = os.path.join(zip_dir, zip_name)
+        # Los ZIP se guardan en la raíz del segmento para igualar la salida de ejemplo
+        dest_zip_path = os.path.join(segment_dir, zip_name)
         
         # Extraer hash MD5 esperado
         checksums = p.get('Checksum', [])
@@ -125,6 +147,15 @@ def process_segment(date_str, orbit, config, client, ui=None):
         downloaded_zips.append(dest_zip_path)
         
     logging.info("Descargas completadas correctamente.")
+    
+    # Deducir satélite (S2A o S2B) a partir del primer zip descargado
+    sat_prefix = "S2X"
+    if downloaded_zips:
+        first_zip = os.path.basename(downloaded_zips[0])
+        if first_zip.startswith("S2A") or first_zip.startswith("S2B") or first_zip.startswith("S2C"):
+            sat_prefix = first_zip[:3]
+            
+    logging.info(f"Satélite detectado para el segmento: {sat_prefix}")
     
     # ------------------------------------------------------------
     # ETAPA 2: Máscaras de nubes y COG L1C (Opcional)
@@ -167,13 +198,7 @@ def process_segment(date_str, orbit, config, client, ui=None):
     if config.product_l1c_generation:
         logging.info("Generación de mosaico L1C 4-bandas activada...")
         
-        # Deducir satélite (S2A o S2B) a partir del primer zip descargado
-        sat_prefix = "S2X"
-        if downloaded_zips:
-            first_zip = os.path.basename(downloaded_zips[0])
-            if first_zip.startswith("S2A") or first_zip.startswith("S2B") or first_zip.startswith("S2C"):
-                sat_prefix = first_zip[:3]
-                
+        # Construcción de COG L1C (si está activada la opción)
         nom_escena_l1c = f"{sat_prefix}_L1C_{orbit}_{compact_date}"
         try:
             cog_builder.build_l1c_4band_cog(segment_dir, nom_escena_l1c, limits_gdal, utm_zone)
@@ -197,20 +222,15 @@ def process_segment(date_str, orbit, config, client, ui=None):
     # Aplicar parche de Baseline 05.11 a los L1C antes de Sen2Cor
     sen2cor_patch.apply_patch_l1c(segment_dir)
         
-    # Adaptar gipp_path de config
-    gipp_path = config.sen2cor_gipp_path
-    if gipp_path and ("/workspace/" in gipp_path or not os.path.exists(gipp_path)):
-        # Si la ruta apunta al contenedor, delegamos al bat interno que ya tiene el GIPP correcto
-        gipp_path = None
-        
     for l1c_d in l1c_dirs:
         logging.info(f"Procesando con Sen2Cor NO-DEM el gránulo: {os.path.basename(l1c_d)}")
         if ui: ui.start_subtask("Sen2Cor NO-DEM", total=100.0)
         
+        # IMPORTANTE: gipp_path=None fuerza el uso de la configuración legacy. variant="NO-DEM" no añade sufijo.
         success = sen2cor_wrapper.run_sen2cor(
             config.sen2cor_bin, 
             l1c_d, 
-            gipp_path=gipp_path, 
+            gipp_path=None,
             resolution=10, 
             variant="NO-DEM",
             progress_callback=ui.update_subtask_progress if ui else None
@@ -218,158 +238,114 @@ def process_segment(date_str, orbit, config, client, ui=None):
         
         if ui: ui.complete_subtask()
         if not success:
-            logging.error("Fallo crítico en Sen2Cor NO-DEM.")
+            logging.error(f"Fallo crítico en Sen2Cor NO-DEM para {os.path.basename(l1c_d)}.")
             return False
             
-    # Aplicar parche de Baseline a los L2A generados
+    # Aplicar parche de Baseline a los L2A NO-DEM generados
     sen2cor_patch.apply_patch_l2a(segment_dir)
-            
-    # Limpiar directorios L1C descomprimidos para liberar espacio
-    # clean_safe_directories(segment_dir, prefix="L1C") # DESACTIVADO POR DEBUG
+    
+    # NOTA: NO borramos los L1C descomprimidos, el usuario ha solicitado preservar los archivos intermedios.
     
     # ------------------------------------------------------------
-    # ETAPA 4: Mosaico L2A de 10 Bandas sin DEM y Capa SCL
+    # ETAPA 4: Corrección Atmosférica con Relieve (DEM-CAT)
     # ------------------------------------------------------------
-    stage_msg = "ETAPA 4: Generando mosaico L2A de 10-Bandas NO-DEM y capa SCL"
+    stage_msg = "ETAPA 4: Ejecutando Sen2Cor DEM-CAT (con relieve topográfico)"
     if ui: ui.update_stage(stage_msg, 4)
     else: logging.info(f">>> {stage_msg}")
-    nom_escena_l2a = f"S2X_L2A_{orbit}_{compact_date}"
-    nom_escena_scl = f"S2X_SCL_{orbit}_{compact_date}"
     
-    try:
-        l2a_10b_mosaic.build_l2a_10band_mosaic(
-            segment_dir, 
-            nom_escena_l2a, 
-            limits_gdal, 
-            utm_zone, 
-            allowed_inner_zeros_l2a=config.allowed_inner_zeros_l2a, 
-            is_demcat=False
-        )
-        
-        scl_extractor.build_l2a_scl_mosaic(
-            segment_dir, 
-            nom_escena_scl, 
-            limits_gdal, 
-            utm_zone, 
-            is_demcat=False
-        )
-    except Exception as e:
-        logging.error(f"Error crítico en la generación de mosaicos L2A / SCL sin DEM: {e}")
-        return False
-        
-    # ------------------------------------------------------------
-    # ETAPA 5: Generación de QuickLooks
-    # ------------------------------------------------------------
-    stage_msg = "ETAPA 5: Generando QuickLooks RGB de 8 bits y RGBI de 16 bits"
-    if ui: ui.update_stage(stage_msg, 5)
-    else: logging.info(f">>> {stage_msg}")
-    mosaic_l2a_path = os.path.join(segment_dir, f"{nom_escena_l2a}.btf")
-    
-    # Adaptar ruta de QuickLooks
-    quicklook_dir = config.quicklook_dir
-    if not quicklook_dir or "/workspace/" in quicklook_dir:
-        quicklook_dir = os.path.join(os.path.dirname(working_folder), "QuickLooks")
-    os.makedirs(quicklook_dir, exist_ok=True)
-    
-    ql_rgb_path = os.path.join(quicklook_dir, f"S2_RGB_8b_{date_str}_{orbit}.tif")
-    ql_rgbi_path = os.path.join(quicklook_dir, f"S2_RGBI_16b_{date_str}_{orbit}.btf")
-    
-    try:
-        quicklook_generator.generate_quicklook_8b(mosaic_l2a_path, ql_rgb_path)
-        quicklook_generator.generate_quicklook_16b(mosaic_l2a_path, ql_rgbi_path)
-    except Exception as e:
-        logging.error(f"Error al generar QuickLooks: {e}")
-        # Continuar con el pipeline de DEMCAT
-        
-    # Limpiar carpetas L2A .SAFE descomprimidas para liberar espacio
-    # clean_safe_directories(segment_dir) # DESACTIVADO POR DEBUG
-    
-    # ------------------------------------------------------------
-    # ETAPA 6: Corrección Atmosférica con Relieve (DEM-CAT)
-    # ------------------------------------------------------------
-    stage_msg = "ETAPA 6: Descomprimiendo L1C originales y ejecutando Sen2Cor DEM-CAT"
-    if ui: ui.update_stage(stage_msg, 6)
-    else: logging.info(f">>> {stage_msg}")
-    
-    # Volver a descomprimir L1C temporales de los ZIPs locales
-    for z_path in downloaded_zips:
-        logging.info(f"Descomprimiendo L1C temporal para DEM-CAT: {z_path}...")
-        try:
-            with zipfile.ZipFile(z_path, 'r') as zip_ref:
-                zip_ref.extractall(segment_dir)
-        except Exception as e:
-            logging.error(f"Error al descomprimir {z_path}: {e}")
-            return False
-            
-    # Aplicar parche de Baseline 05.11 a los L1C recién descomprimidos
-    sen2cor_patch.apply_patch_l1c(segment_dir)
-            
-    # Buscar carpetas L1C
-    l1c_dirs_dem = glob.glob(os.path.join(segment_dir, "*L1C*.SAFE"))
-    for l1c_d in l1c_dirs_dem:
+    # Usamos los mismos l1c_dirs ya que no los hemos borrado
+    for l1c_d in l1c_dirs:
         logging.info(f"Procesando con Sen2Cor DEM-CAT el gránulo: {os.path.basename(l1c_d)}")
         if ui: ui.start_subtask("Sen2Cor DEM-CAT", total=100.0)
         
+        # IMPORTANTE: Se inyecta expresamente la ruta del gipp_demcat y la variant DEMCAT
         success = sen2cor_wrapper.run_sen2cor(
             config.sen2cor_bin, 
             l1c_d, 
-            gipp_path=gipp_path_dem, 
+            gipp_path=config.l2a_gipp_demcat, 
             resolution=10, 
-            variant="DEM-CAT",
+            variant="DEMCAT",
             progress_callback=ui.update_subtask_progress if ui else None
         )
         
         if ui: ui.complete_subtask()
         if not success:
-            logging.error("Fallo crítico en Sen2Cor DEM-CAT con relieve.")
+            logging.error(f"Fallo crítico en Sen2Cor DEM-CAT para {os.path.basename(l1c_d)}.")
             return False
             
-    # Aplicar parche de Baseline a los L2A DEM-CAT
+    # Aplicar parche de Baseline a los L2A DEMCAT
     sen2cor_patch.apply_patch_l2a(segment_dir)
             
-    # Limpiar directorios L1C descomprimidos
-    # clean_safe_directories(segment_dir, prefix="L1C") # DESACTIVADO POR DEBUG
-    
     # ------------------------------------------------------------
-    # ETAPA 7: Mosaico L2A DEMCAT y Cálculo de NDVI
+    # ETAPA 5: Ensamblaje de Mosaicos GDAL (NO-DEM y DEMCAT)
     # ------------------------------------------------------------
-    stage_msg = "ETAPA 7: Generando mosaico L2A DEMCAT, SCL DEMCAT y cálculo de NDVI"
-    if ui: ui.update_stage(stage_msg, 7)
+    stage_msg = "ETAPA 5: Ensamblando Mosaicos L2A, SCL, NDVI y QuickLooks"
+    if ui: ui.update_stage(stage_msg, 5)
     else: logging.info(f">>> {stage_msg}")
-    nom_escena_l2a_demcat = f"S2X_L2A_{orbit}_{compact_date}_DEMCAT"
-    nom_escena_scl_demcat = f"S2X_SCL_{orbit}_{compact_date}_DEMCAT"
     
-    try:
-        # Generar mosaico 10-bandas DEMCAT
-        l2a_10b_mosaic.build_l2a_10band_mosaic(
-            segment_dir, 
-            nom_escena_l2a_demcat, 
-            limits_gdal, 
-            utm_zone, 
-            allowed_inner_zeros_l2a=config.allowed_inner_zeros_l2a, 
-            is_demcat=True
-        )
-        
-        # Generar SCL DEMCAT
-        scl_extractor.build_l2a_scl_mosaic(
-            segment_dir, 
-            nom_escena_scl_demcat, 
-            limits_gdal, 
-            utm_zone, 
-            is_demcat=True
-        )
-        
-        # Calcular NDVI
-        mosaic_demcat_path = os.path.join(segment_dir, f"{nom_escena_l2a_demcat}.btf")
-        output_ndvi_path = os.path.join(segment_dir, f"S2X_NDVI_{orbit}_{compact_date}.tif")
-        
-        ndvi_calculator.calculate_l2a_ndvi(mosaic_demcat_path, output_ndvi_path)
-    except Exception as e:
-        logging.error(f"Error crítico en la generación de mosaicos DEMCAT o cálculo de NDVI: {e}")
-        return False
-        
-    # Limpiar directorios L2A .SAFE de la sesión
-    # clean_safe_directories(segment_dir) # DESACTIVADO POR DEBUG
+    nom_escena_l2a = f"{sat_prefix}_L2A_{orbit}_{compact_date}"
+    nom_escena_scl = f"{sat_prefix}_SCL_{orbit}_{compact_date}"
+    
+    safe_dirs_all = glob.glob(os.path.join(segment_dir, "S2*_MSIL2A_*.SAFE"))
+    safe_dirs_demcat = [d for d in safe_dirs_all if d.endswith("_DEMCAT.SAFE")]
+    safe_dirs_nodem = [d for d in safe_dirs_all if not d.endswith("_DEMCAT.SAFE")]
+    
+    # 5.1 MOSAICO NO-DEM
+    if safe_dirs_nodem:
+        logging.info("Ensamblando Mosaico L2A NO-DEM...")
+        try:
+            mosaic_10b_path = os.path.join(segment_dir, f"{nom_escena_l2a}.btf")
+            l2a_10b_mosaic.build_l2a_10band_mosaic(segment_dir, nom_escena_l2a, limits_gdal, utm_zone, config.allowed_inner_zeros_l2a, is_demcat=False)
+            
+            scl_path = os.path.join(segment_dir, f"{nom_escena_scl}.tif")
+            scl_extractor.build_l2a_scl_mosaic(segment_dir, nom_escena_scl, limits_gdal, utm_zone, is_demcat=False)
+            
+            ndvi_path = os.path.join(segment_dir, f"{sat_prefix}_NDVI_{orbit}_{compact_date}.tif")
+            ndvi_calculator.calculate_l2a_ndvi(mosaic_10b_path, ndvi_path)
+            
+            # QuickLooks
+            os.makedirs(os.path.join(segment_dir, "QuickLook"), exist_ok=True)
+            rgb_path = os.path.join(segment_dir, "QuickLook", f"{nom_escena_l2a}_RGB_8b.tif")
+            rgbi_path = os.path.join(segment_dir, "QuickLook", f"{nom_escena_l2a}_RGBI_16b.tif")
+            quicklook_generator.generate_quicklook_8b(mosaic_10b_path, rgb_path)
+            quicklook_generator.generate_quicklook_16b(mosaic_10b_path, rgbi_path)
+            
+        except Exception as e:
+            logging.error(f"Error ensamblando mosaico NO-DEM: {e}")
+            return False
+            
+    # 5.2 MOSAICO DEMCAT
+    if safe_dirs_demcat:
+        nom_escena_l2a_dem = f"{nom_escena_l2a}_DEMCAT"
+        nom_escena_scl_dem = f"{nom_escena_scl}_DEMCAT"
+        logging.info("Ensamblando Mosaico L2A DEMCAT...")
+        try:
+            mosaic_10b_dem_path = os.path.join(segment_dir, f"{nom_escena_l2a_dem}.btf")
+            l2a_10b_mosaic.build_l2a_10band_mosaic(segment_dir, nom_escena_l2a_dem, limits_gdal, utm_zone, config.allowed_inner_zeros_l2a, is_demcat=True)
+            
+            scl_dem_path = os.path.join(segment_dir, f"{nom_escena_scl_dem}.tif")
+            scl_extractor.build_l2a_scl_mosaic(segment_dir, nom_escena_scl_dem, limits_gdal, utm_zone, is_demcat=True)
+            
+            ndvi_dem_path = os.path.join(segment_dir, f"{sat_prefix}_NDVI_{orbit}_{compact_date}_DEMCAT.tif")
+            ndvi_calculator.calculate_l2a_ndvi(mosaic_10b_dem_path, ndvi_dem_path)
+            
+            # QuickLooks
+            os.makedirs(os.path.join(segment_dir, "QuickLook"), exist_ok=True)
+            rgb_dem_path = os.path.join(segment_dir, "QuickLook", f"{nom_escena_l2a_dem}_RGB_8b.tif")
+            rgbi_dem_path = os.path.join(segment_dir, "QuickLook", f"{nom_escena_l2a_dem}_RGBI_16b.tif")
+            quicklook_generator.generate_quicklook_8b(mosaic_10b_dem_path, rgb_dem_path)
+            quicklook_generator.generate_quicklook_16b(mosaic_10b_dem_path, rgbi_dem_path)
+            
+        except Exception as e:
+            logging.error(f"Error ensamblando mosaico DEMCAT: {e}")
+            return False
+            
+    # ------------------------------------------------------------
+    # ETAPA 6: Fin del Procesamiento
+    # ------------------------------------------------------------
+    # El usuario solicitó mantener todos los ficheros intermedios.
+    # Se han desactivado `compress_safe_to_zip` y `clean_safe_directories`.
+    logging.info("Omitiendo limpieza de ficheros .SAFE por solicitud del usuario.")
     
     logging.info(f"============================================================")
     logging.info(f"SEGMENTO COMPLETADO CON ÉXITO: {segment_name}")

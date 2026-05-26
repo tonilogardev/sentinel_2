@@ -84,11 +84,12 @@
         }
     },
     "workspace": {
-        "workingFolder": "f:\\Disc_F\\Orto_S2_CAT\\antonio\\open_code_project\\SOFT_new\\output\\segments",
-        "quicklookDir": "f:\\Disc_F\\Orto_S2_CAT\\antonio\\open_code_project\\SOFT_new\\output\\QuickLooks",
+        "__TODO__": "URGENTE: Antes de mandar esto a produccion, cambiar workingFolder de K:\\t a 'output/segments' para evitar que rompa en otros ordenadores",
+        "workingFolder": "K:\\t",
+        "quicklookDir": "output/QuickLooks",
         "sen2cor": {
-            "bin": "f:\\Disc_F\\Orto_S2_CAT\\antonio\\open_code_project\\SOFT_new\\Sen2Cor-02.12.03-win64\\L2A_Process.bat",
-            "gippPath": null
+            "bin": "Sen2Cor-02.12.03-win64/L2A_Process.bat",
+            "gippPath": "sen2cor_data\\DEM-CAT\\cfg\\L2A_GIPP.xml"
         }
     },
     "satellites": {
@@ -104,7 +105,7 @@
     },
     "dateRange": {
         "start": "2026-05-01",
-        "end": "2026-05-04"
+        "end": "2026-05-03"
     },
     "orbits": [
         "R051",

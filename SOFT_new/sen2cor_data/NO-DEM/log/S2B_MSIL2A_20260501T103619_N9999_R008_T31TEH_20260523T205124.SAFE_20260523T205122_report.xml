@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Sen2Cor_Level-2A_Report_File>
+<check>
+<inspection execution="2026-05-23T20:51:24.522" level=" INFO" process="22576" module="L2A_ProcessDataStrip" function="generate" line="366"/>
+<message contentType="Text">Progress[%]:  0.00 : Generating datastrip metadata</message>
+</check>
+<check>
+<inspection execution="2026-05-23T20:51:24.772" level="INFO" process="22576" module="L2A_XmlParser" function="validate" line="118"/>
+<message contentType="Text">validating metadata file MTD_DS.xml against scheme</message>
+</check>
+<check>
+<inspection execution="2026-05-23T20:51:25.625" level="INFO" process="22576" module="L2A_XmlParser" function="validate" line="124"/>
+<message contentType="Text">metadata file is valid</message>
+</check>
+<check>
+<inspection execution="2026-05-23T20:51:25.628" level="INFO" process="22576" module="L2A_ProcessDataStrip" function="generate" line="414"/>
+<message contentType="Text">datastrip directory is: F:\Disc_F\Orto_S2_CAT\antonio\open_code_project\SOFT_new\output\segments\2026-05-01_R008\S2B_MSIL2A_20260501T103619_N9999_R008_T31TEH_20260523T205124.SAFE\DATASTRIP\DS_2BPS_20260523T205125_S20260501T104430</message>
+</check>
+<check>
+<inspection execution="2026-05-23T20:51:27.778" level="INFO" process="22576" module="L2A_XmlParser" function="validate" line="118"/>
+<message contentType="Text">validating metadata file MTD_DS.xml against scheme</message>
+</check>
+<check>
+<inspection execution="2026-05-23T20:51:28.861" level=" INFO" process="22576" module="L2A_XmlParser" function="validate" line="127"/>
+<message contentType="Text">Syntax error in metadata, see report file for details.</message>
+</check>
+<check>
+<inspection execution="2026-05-23T20:51:28.861" level="ERROR" process="22576" module="L2A_XmlParser" function="validate" line="128"/>
+<message contentType="Text">Schema file: S2-PDGS-TAS-DI-PSD-V14.9_Schema\S2_PDI_Level-2A_Datastrip_Metadata.xsd</message>
+</check>
+<check>
+<inspection execution="2026-05-23T20:51:28.861" level="ERROR" process="22576" module="L2A_XmlParser" function="validate" line="129"/>
+<message contentType="Text">Details: Element 'GIPP_FILENAME', attribute 'type': [facet 'enumeration'] The value 'GIP_HRTPAR' is not an element of the set {'GIP_ATMIMA', 'GIP_ATMSAD', 'GIP_DATATI', 'GIP_LREXTR', 'GIP_INVLOC', 'GIP_VIEDIR', 'GIP_SPAMOD', 'GIP_BLINDP', 'GIP_CLOINV', 'GIP_PRDLOC', 'GIP_R2PARA', 'GIP_R2SWIR', 'GIP_R2EOB2', 'GIP_R2EQOG', 'GIP_R2DEPI', 'GIP_R2DEFI', 'GIP_R2WAFI', 'GIP_R2L2NC', 'GIP_R2DENT', 'GIP_R2DECT', 'GIP_R2NOMO', 'GIP_R2ABCA', 'GIP_R2BINN', 'GIP_R2CRCO', 'GIP_G2PARA', 'GIP_G2PARE', 'GIP_EARMOD', 'GIP_GEOPAR', 'GIP_INTDET', 'GIP_TILPAR', 'GIP_RESPAR', 'GIP_MASPAR', 'GIP_JP2KPA', 'GIP_ECMWFP', 'GIP_DECOMP', 'GIP_OLQCPA', 'GIP_PROBAS', 'GIP_CONVER', 'GIP_L2AUSR', 'GIP_L2ACSC', 'GIP_L2ACAC', 'GIP_PROBA2', 'GIP_CLOPAR'}.</message>
+</check>
+<check>
+<inspection execution="2026-05-23T20:51:29.020" level=" INFO" process="22576" module="L2A_ProcessDataStrip" function="generate" line="441"/>
+<message contentType="Text">L2A datastrip successfully generated</message>
+</check>
+<check>
+<inspection execution="2026-05-23T20:51:29.677" level="INFO" process="22576" module="L2A_Config" function="create_L2A_Tile" line="4118"/>
+<message contentType="Text">L2A tile directory is: F:\Disc_F\Orto_S2_CAT\antonio\open_code_project\SOFT_new\output\segments\2026-05-01_R008\S2B_MSIL2A_20260501T103619_N9999_R008_T31TEH_20260523T205124.SAFE\GRANULE\L2A_T31TEH_A047796_20260501T104430</message>
+</check>
+<check>
+<inspection execution="2026-05-23T20:51:29.727" level="INFO" process="22576" module="L2A_Logger" function="__init__" line="92"/>
+<message contentType="Text">logging for the main process initialized</message>
+</check>
+<check>
+<inspection execution="2026-05-23T20:51:29.727" level=" INFO" process="22576" module="L2A_ProcessTileToolbox" function="process" line="114"/>
+<message contentType="Text">Selected resolution: 10 m</message>
+</check>
+<check>
+<inspection execution="2026-05-23T20:51:30.237" level="INFO" process="22576" module="L2A_XmlParser" function="validate" line="118"/>
+<message contentType="Text">validating metadata file MTD_DS.xml against scheme</message>
+</check>
+<check>
+<inspection execution="2026-05-23T20:51:31.319" level="INFO" process="22576" module="L2A_XmlParser" function="validate" line="124"/>
+<message contentType="Text">metadata file is valid</message>
+</check>
+<check>
+<inspection execution="2026-05-23T20:51:31.326" level="INFO" process="22576" module="L2A_Config" function="readPreferences" line="4482"/>
+<message contentType="Text">input product origins from: Sentinel-2B</message>
+</check>
+<check>
+<inspection execution="2026-05-23T20:51:31.326" level="INFO" process="22576" module="L2A_XmlParser" function="validate" line="118"/>
+<message contentType="Text">validating metadata file L2A_CAL_SC_GIPP.xml against scheme</message>
+</check>
+<check>
+<inspection execution="2026-05-23T20:51:31.326" level="INFO" process="22576" module="L2A_XmlParser" function="validate" line="124"/>
+<message contentType="Text">metadata file is valid</message>
+</check>
+<check>
+<inspection execution="2026-05-23T20:51:31.326" level="INFO" process="22576" module="L2A_XmlParser" function="validate" line="118"/>
+<message contentType="Text">validating metadata file L2A_CAL_AC_GIPP.xml against scheme</message>
+</check>
+<check>
+<inspection execution="2026-05-23T20:51:31.342" level="INFO" process="22576" module="L2A_XmlParser" function="validate" line="124"/>
+<message contentType="Text">metadata file is valid</message>
+</check>
+<check>
+<inspection execution="2026-05-23T20:51:31.342" level="INFO" process="22576" module="L2A_XmlParser" function="validate" line="118"/>
+<message contentType="Text">validating metadata file L2A_GIPP.xml against scheme</message>
+</check>
+<check>
+<inspection execution="2026-05-23T20:51:31.345" level="INFO" process="22576" module="L2A_XmlParser" function="validate" line="124"/>
+<message contentType="Text">metadata file is valid</message>
+</check>
+<check>
+<inspection execution="2026-05-23T20:51:32.262" level=" INFO" process="22576" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 0.14 : PID-22576, L2A_ProcessTile: 20 m resolution must be processed first, elapsed time[s]: 2.518, total: 0:00:09.406000</message>
+</check>
+<check>
+<inspection execution="2026-05-23T20:51:32.776" level="INFO" process="22576" module="L2A_XmlParser" function="validate" line="118"/>
+<message contentType="Text">validating metadata file MTD_DS.xml against scheme</message>
+</check>
+<check>
+<inspection execution="2026-05-23T20:51:33.888" level="INFO" process="22576" module="L2A_XmlParser" function="validate" line="124"/>
+<message contentType="Text">metadata file is valid</message>
+</check>
+<check>
+<inspection execution="2026-05-23T20:51:33.888" level="INFO" process="22576" module="L2A_Config" function="readPreferences" line="4482"/>
+<message contentType="Text">input product origins from: Sentinel-2B</message>
+</check>
+<check>
+<inspection execution="2026-05-23T20:51:33.895" level="INFO" process="22576" module="L2A_XmlParser" function="validate" line="118"/>
+<message contentType="Text">validating metadata file L2A_CAL_SC_GIPP.xml against scheme</message>
+</check>
+<check>
+<inspection execution="2026-05-23T20:51:33.895" level="INFO" process="22576" module="L2A_XmlParser" function="validate" line="124"/>
+<message contentType="Text">metadata file is valid</message>
+</check>
+<check>
+<inspection execution="2026-05-23T20:51:33.895" level="INFO" process="22576" module="L2A_XmlParser" function="validate" line="118"/>
+<message contentType="Text">validating metadata file L2A_CAL_AC_GIPP.xml against scheme</message>
+</check>
+<check>
+<inspection execution="2026-05-23T20:51:33.895" level="INFO" process="22576" module="L2A_XmlParser" function="validate" line="124"/>
+<message contentType="Text">metadata file is valid</message>
+</check>
+<check>
+<inspection execution="2026-05-23T20:51:33.911" level="INFO" process="22576" module="L2A_XmlParser" function="validate" line="118"/>
+<message contentType="Text">validating metadata file L2A_GIPP.xml against scheme</message>
+</check>
+<check>
+<inspection execution="2026-05-23T20:51:33.911" level="INFO" process="22576" module="L2A_XmlParser" function="validate" line="124"/>
+<message contentType="Text">metadata file is valid</message>
+</check>
+<check>
+<inspection execution="2026-05-23T20:51:35.177" level=" INFO" process="22576" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 0.29 : PID-22576, L2A_ProcessTile: processing with resolution 20 m, elapsed time[s]: 2.932, total: 0:00:12.338000</message>
+</check>
+<check>
+<inspection execution="2026-05-23T20:51:35.177" level=" INFO" process="22576" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 0.29 : PID-22576, L2A_ProcessTile: start of pre processing, elapsed time[s]: 0.000, total: 0:00:12.338000</message>
+</check>
+<check>
+<inspection execution="2026-05-23T20:51:35.177" level="INFO" process="22576" module="L2A_ProcessTileToolbox" function="preprocess" line="225"/>
+<message contentType="Text">pre-processing with resolution 20 m</message>
+</check>
+<check>
+<inspection execution="2026-05-23T20:51:35.177" level="INFO" process="22576" module="L2A_ProcessTileToolbox" function="preprocess" line="230"/>
+<message contentType="Text">checking configuration</message>
+</check>
+<check>
+<inspection execution="2026-05-23T20:51:35.197" level="INFO" process="22576" module="L2A_XmlParser" function="validate" line="118"/>
+<message contentType="Text">validating metadata file MTD_TL.xml against scheme</message>
+</check>
+<check>
+<inspection execution="2026-05-23T20:51:35.272" level="INFO" process="22576" module="L2A_XmlParser" function="validate" line="124"/>
+<message contentType="Text">metadata file is valid</message>
+</check>
+<check>
+<inspection execution="2026-05-23T20:51:35.278" level="INFO" process="22576" module="L2A_Config" function="setOzoneContentFromMetadata" line="5529"/>
+<message contentType="Text">ozone mean value is: 348.06107539</message>
+</check>
+<check>
+<inspection execution="2026-05-23T20:51:35.278" level="INFO" process="22576" module="L2A_Config" function="createAtmDataFilename" line="5472"/>
+<message contentType="Text">Ozone_Content is set to h with 17.061075 least difference to input value</message>
+</check>
+<check>
+<inspection execution="2026-05-23T20:51:35.278" level="INFO" process="22576" module="L2A_Config" function="createAtmDataFilename" line="5475"/>
+<message contentType="Text">generated file name for look up tables is: h99000_wv20_rura.atm</message>
+</check>
+<check>
+<inspection execution="2026-05-23T20:51:35.278" level="INFO" process="22576" module="L2A_Config" function="createAtmDataFilename" line="5481"/>
+<message contentType="Text">look up table for S2B found and used</message>
+</check>
+<check>
+<inspection execution="2026-05-23T20:51:35.278" level=" INFO" process="22576" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 0.30 : PID-22576, L2A_Tables: start import, elapsed time[s]: 0.100, total: 0:00:12.438000</message>
+</check>
+<check>
+<inspection execution="2026-05-23T20:51:36.211" level=" INFO" process="22576" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 0.35 : PID-22576, L2A_Tables: band B01 imported, elapsed time[s]: 0.918, total: 0:00:13.356000</message>
+</check>
+<check>
+<inspection execution="2026-05-23T20:51:40.519" level=" INFO" process="22576" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 0.58 : PID-22576, L2A_Tables: band B02 imported, elapsed time[s]: 4.320, total: 0:00:17.676000</message>
+</check>
+<check>
+<inspection execution="2026-05-23T20:51:44.845" level=" INFO" process="22576" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 0.81 : PID-22576, L2A_Tables: band B03 imported, elapsed time[s]: 4.318, total: 0:00:21.994000</message>
+</check>
+<check>
+<inspection execution="2026-05-23T20:51:49.397" level=" INFO" process="22576" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 1.06 : PID-22576, L2A_Tables: band B04 imported, elapsed time[s]: 4.563, total: 0:00:26.557000</message>
+</check>
+<check>
+<inspection execution="2026-05-23T20:51:52.062" level=" INFO" process="22576" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 1.20 : PID-22576, L2A_Tables: band B05 imported, elapsed time[s]: 2.665, total: 0:00:29.222000</message>
+</check>
+<check>
+<inspection execution="2026-05-23T20:51:54.654" level=" INFO" process="22576" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 1.34 : PID-22576, L2A_Tables: band B06 imported, elapsed time[s]: 2.589, total: 0:00:31.811000</message>
+</check>
+<check>
+<inspection execution="2026-05-23T20:51:57.323" level=" INFO" process="22576" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 1.49 : PID-22576, L2A_Tables: band B07 imported, elapsed time[s]: 2.671, total: 0:00:34.482000</message>
+</check>
+<check>
+<inspection execution="2026-05-23T20:51:59.970" level=" INFO" process="22576" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 1.63 : PID-22576, L2A_Tables: band B8A imported, elapsed time[s]: 2.643, total: 0:00:37.125000</message>
+</check>
+<check>
+<inspection execution="2026-05-23T20:52:00.913" level=" INFO" process="22576" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 1.68 : PID-22576, L2A_Tables: band B09 imported, elapsed time[s]: 0.948, total: 0:00:38.073000</message>
+</check>
+<check>
+<inspection execution="2026-05-23T20:52:01.851" level=" INFO" process="22576" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 1.73 : PID-22576, L2A_Tables: band B10 imported, elapsed time[s]: 0.937, total: 0:00:39.010000</message>
+</check>
+<check>
+<inspection execution="2026-05-23T20:52:04.463" level=" INFO" process="22576" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 1.87 : PID-22576, L2A_Tables: band B11 imported, elapsed time[s]: 2.597, total: 0:00:41.607000</message>
+</check>
+<check>
+<inspection execution="2026-05-23T20:52:07.009" level=" INFO" process="22576" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 2.01 : PID-22576, L2A_Tables: band B12 imported, elapsed time[s]: 2.559, total: 0:00:44.166000</message>
+</check>
+<check>
+<inspection execution="2026-05-23T20:52:07.029" level=" INFO" process="22576" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 2.01 : PID-22576, L2A_Tables: QLT_MSK, the quality check is Passed, elapsed time[s]: 0.022, total: 0:00:44.188000</message>
+</check>
+<check>
+<inspection execution="2026-05-23T20:52:07.029" level=" INFO" process="22576" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 2.01 : PID-22576, L2A_Tables: no MSK_QUALIT available, skipping the handling of Quality Mask, elapsed time[s]: 0.002, total: 0:00:44.190000</message>
+</check>
+<check>
+<inspection execution="2026-05-23T20:52:07.062" level=" INFO" process="22576" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 2.01 : PID-22576, L2A_Tables: AUX_CAMS* file found., elapsed time[s]: 0.029, total: 0:00:44.219000</message>
+</check>
+<check>
+<inspection execution="2026-05-23T20:52:18.596" level=" INFO" process="22576" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 2.63 : PID-22576, L2A_Tables: Visibility map from file AUX_CAMSFO prepared, elapsed time[s]: 11.538, total: 0:00:55.757000</message>
+</check>
+<check>
+<inspection execution="2026-05-23T20:52:18.607" level="INFO" process="22576" module="L2A_Tables" function="gdalDEM_srtm" line="2661"/>
+<message contentType="Text">Start DEM alignment for tile</message>
+</check>
+<check>
+<inspection execution="2026-05-23T20:52:18.607" level="INFO" process="22576" module="L2A_Tables" function="gdalDEM_srtm" line="2693"/>
+<message contentType="Text">Dem exists: srtm_37_04.tif</message>
+</check>
+<check>
+<inspection execution="2026-05-23T20:52:25.713" level=" INFO" process="22576" module="L2A_Config" function="timestamp" line="4386"/>
+<message contentType="Text">Progress[%]: 3.02 : PID-22576, L2A_Tables: band DEM imported, elapsed time[s]: 7.116, total: 0:01:02.873000</message>
+</check>

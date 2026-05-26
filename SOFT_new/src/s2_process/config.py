@@ -5,7 +5,7 @@ import logging
 class PipelineConfig:
     def __init__(self, json_path, env_path=None):
         self.json_path = json_path
-        self.env_path = env_path or os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(json_path))), ".env")
+        self.env_path = env_path or os.path.join(os.path.dirname(json_path), ".env")
         self.params = {}
         self.env_vars = {}
         
@@ -39,6 +39,14 @@ class PipelineConfig:
         except Exception as e:
             logging.error(f"Error al leer el archivo .env: {e}")
 
+    def _resolve_path(self, p):
+        """Resuelve paths relativos convirtiéndolos a absolutos según la ubicación del JSON."""
+        if not p or "/workspace/" in p:
+            return p
+        if not os.path.isabs(p):
+            return os.path.normpath(os.path.join(os.path.dirname(self.json_path), p))
+        return p
+
     @property
     def api_download_url(self):
         return self.params.get("api", {}).get("downloadURL")
@@ -61,19 +69,19 @@ class PipelineConfig:
 
     @property
     def working_folder(self):
-        return self.params.get("workspace", {}).get("workingFolder")
+        return self._resolve_path(self.params.get("workspace", {}).get("workingFolder"))
 
     @property
     def quicklook_dir(self):
-        return self.params.get("workspace", {}).get("quicklookDir")
+        return self._resolve_path(self.params.get("workspace", {}).get("quicklookDir"))
 
     @property
     def sen2cor_bin(self):
-        return self.params.get("workspace", {}).get("sen2cor", {}).get("bin")
+        return self._resolve_path(self.params.get("workspace", {}).get("sen2cor", {}).get("bin"))
 
     @property
     def sen2cor_gipp_path(self):
-        return self.params.get("workspace", {}).get("sen2cor", {}).get("gippPath")
+        return self._resolve_path(self.params.get("workspace", {}).get("sen2cor", {}).get("gippPath"))
 
     @property
     def poly_search(self):
