@@ -190,7 +190,14 @@ def run_sen2cor(sen2cor_bin, granule_safe_path, gipp_path=None, resolution=10, v
         segment_dir = os.path.dirname(granule_safe_path)
         l1c_name = os.path.basename(granule_safe_path)
         
-        l2a_pattern = l1c_name.replace("MSIL1C", "MSIL2A")
+        # Sen2Cor 2.12 cambia el baseline a N9999 y usa el timestamp de procesamiento en el nombre final.
+        # En lugar de hacer un replace estricto, construimos un patrón fnmatch flexible.
+        parts = l1c_name.split('_')
+        if len(parts) >= 6:
+            # Ej: S2A_MSIL1C_20260501T104651_N0512_R051_T30TYK_20260501T174552.SAFE
+            l2a_pattern = f"{parts[0]}_MSIL2A_{parts[2]}_*_{parts[4]}_{parts[5]}_*.SAFE"
+        else:
+            l2a_pattern = l1c_name.replace("MSIL1C", "MSIL2A")
         
         # Buscar gránulos L2A en el segmento que no hayan sido renombrados a DEMCAT o NODEM aún
         l2a_pure_candidates = [d for d in fnmatch.filter(os.listdir(segment_dir), l2a_pattern) 
