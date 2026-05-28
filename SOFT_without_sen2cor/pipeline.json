@@ -1,19 +1,82 @@
 {
-    "temporal_window": {
-        "start_date": "2026-05-01",
-        "end_date": "2026-05-03"
+    "description": "Configuracion del pipeline Cloud-Native S2-PROCESS",
+    "api": {
+        "downloadURL": "https://catalogue.dataspace.copernicus.eu/",
+        "authentificationURL": "https://identity.dataspace.copernicus.eu/"
     },
-    "spatial_config": {
-        "orbits": ["R051", "R008"],
-        "limits_utm": [426000, 4496000, 440000, 4510000]
+    "pipeline": {
+        "timeSleep": 3600,
+        "productL1Cgeneration": "YES",
+        "onlyLastBaselineForGranule": "YES",
+        "checkTwoDatastrips": "YES",
+        "twoDatastripsThreshold": 0.95,
+        "twoDatastripsWaitingTime": 86400
     },
-    "paths": {
-        "input_dir": "./data/l1c",
-        "dem_path": "./data/dem.btf",
-        "output_dir": "./output"
+    "area": {
+        "polySearch": "POLYGON((0.1873941083836813 40.46212014624089,3.6319312482049257 40.46212014624089,3.6319312482049257 42.91398496782941,0.1873941083836813 42.91398496782941,0.1873941083836813 40.46212014624089))",
+        "limitsUTM": {
+            "R051": [
+                240000,
+                467500,
+                4780000,
+                4480000
+            ],
+            "R008": [
+                300000,
+                540000,
+                4780000,
+                4480000
+            ]
+        },
+        "perOrbitZoneUTM": {
+            "R051": "T31",
+            "R008": "T31"
+        },
+        "granulesPerOrbit": {
+            "R051": [
+                "T30TYN",
+                "T31TBE",
+                "T31TBF",
+                "T31TBG",
+                "T31TCE",
+                "T31TCF",
+                "T31TCG",
+                "T31TCH",
+                "T31TDF",
+                "T31TDG",
+                "T31TDH"
+            ],
+            "R008": [
+                "T31TBE",
+                "T31TCE",
+                "T31TCF",
+                "T31TCG",
+                "T31TCH",
+                "T31TDE",
+                "T31TDF",
+                "T31TDG",
+                "T31TDH",
+                "T31TEE",
+                "T31TEF",
+                "T31TEG",
+                "T31TEH"
+            ]
+        }
+    },
+    "workspace": {
+        "workingFolder": "./data",
+        "outputFolder": "./output"
     },
     "processing": {
-        "target_resolution": 10,
-        "selected_engine": "force"
-    }
+        "targetResolution": 10,
+        "selectedEngine": "force"
+    },
+    "dateRange": {
+        "start": "2026-05-01",
+        "end": "2026-05-22"
+    },
+    "orbits": [
+        "R051",
+        "R008"
+    ]
 }

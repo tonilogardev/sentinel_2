@@ -1,6 +1,19 @@
 version: "3.8"
 
 services:
+  orchestrator:
+    build: 
+      context: ./docker/orchestrator
+    image: s2_process_orchestrator:latest
+    container_name: s2_orchestrator
+    env_file:
+      - .env
+    volumes:
+      - ./:/app:rw
+      - ./data:/data:rw
+      - ./output:/output:rw
+    command: ["tail", "-f", "/dev/null"]
+
   force:
     build: 
       context: ./docker/force
