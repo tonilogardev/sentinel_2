@@ -1,0 +1,19 @@
+{
+    "temporal_window": {
+        "start_date": "2026-05-01",
+        "end_date": "2026-05-03"
+    },
+    "spatial_config": {
+        "orbits": ["R051", "R008"],
+        "limits_utm": [426000, 4496000, 440000, 4510000]
+    },
+    "paths": {
+        "input_dir": "./data/l1c",
+        "dem_path": "./data/dem.btf",
+        "output_dir": "./output"
+    },
+    "processing": {
+        "target_resolution": 10,
+        "selected_engine": "force"
+    }
+}

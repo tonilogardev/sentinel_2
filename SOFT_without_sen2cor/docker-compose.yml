@@ -1,0 +1,38 @@
+version: "3.8"
+
+services:
+  force:
+    build: 
+      context: ./docker/force
+    image: s2_process_force:latest
+    container_name: s2_force_processor
+    env_file:
+      - .env
+    volumes:
+      - ./data:/data:ro
+      - ./output:/output:rw
+    command: ["/bin/bash", "-c", "echo 'Ejecutando FORCE (simulado) ...'"]
+
+  siac:
+    build: 
+      context: ./docker/siac
+    image: s2_process_siac:latest
+    container_name: s2_siac_processor
+    env_file:
+      - .env
+    volumes:
+      - ./data:/data:ro
+      - ./output:/output:rw
+    command: ["/bin/bash", "-c", "echo 'Ejecutando SIAC (simulado) ...'"]
+
+  acolite:
+    build: 
+      context: ./docker/acolite
+    image: s2_process_acolite:latest
+    container_name: s2_acolite_processor
+    env_file:
+      - .env
+    volumes:
+      - ./data:/data:ro
+      - ./output:/output:rw
+    command: ["/bin/bash", "-c", "echo 'Ejecutando ACOLITE (simulado) ...'"]
